@@ -7,7 +7,15 @@ services:
     #service_name:
     #    class: AppBundle\Directory\ClassName
     #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']
-  meetup_client:
-    class: DMS\Service\Meetup\MeetupKeyAuthClient
+  _defaults:
+    autowire: true
+
+  DMS\Service\Meetup\MeetupKeyAuthClient:
     factory: ['DMS\Service\Meetup\MeetupKeyAuthClient', 'factory']
     arguments: [ {key: '%env(MEETUP_API_KEY)%'} ]
+
+  AppBundle\Services\MeetupService: ~
+
+  AppBundle\Repository\MeetupGroupRepository:
+    factory: ['@doctrine', getRepository]
+    arguments: ['AppBundle:MeetupGroup']

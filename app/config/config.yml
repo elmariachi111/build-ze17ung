@@ -41,6 +41,24 @@ twig:
 
 # Doctrine Configuration
 doctrine:
+  dbal:
+    default_connection: default
+    connections:
+      default:
+        driver: pdo_pgsql
+        dbname: buildz
+        host: ~
+        port: ~
+        user: buildz
+        password: buildz
+
+  orm:
+    default_entity_manager: ~
+    auto_mapping: true
+    mappings:
+      AppBundle:
+        type: annotation
+
 
 # Swiftmailer Configuration
 swiftmailer:

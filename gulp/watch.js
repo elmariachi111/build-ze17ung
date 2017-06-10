@@ -11,13 +11,11 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync) {
       // Styles
       gulp.watch([
         path.join(dirs.source, dirs.styles, '**/*.{scss,sass}'),
-        path.join(dirs.source, dirs.modules, '**/*.{scss,sass}')
       ], ['sass']);
 
       // Nunjucks Templates
       gulp.watch([
         path.join(dirs.source, '**/*.nunjucks'),
-        path.join(dirs.source, dirs.data, '**/*.{json,yaml,yml}')
       ], ['nunjucks']);
       
 
