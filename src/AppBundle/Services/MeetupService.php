@@ -5,39 +5,46 @@ use AppBundle\Entity\MeetupEvent;
 use AppBundle\Entity\MeetupGroup;
 use AppBundle\Repository\MeetupGroupRepository;
 use DMS\Service\Meetup\MeetupKeyAuthClient;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class MeetupService
 {
-    /** @var MeetupGroupRepository */
-    private $meetupGroupRepo;
-
     /** @var MeetupKeyAuthClient  */
     private $meetupClient;
+
+    /** @var Serializer */
+    private $serializer;
 
     /**
      * MeetupService constructor.
      */
-    public function __construct(MeetupGroupRepository $groupRepository, MeetupKeyAuthClient $meetupClient)
+    public function __construct(MeetupKeyAuthClient $meetupClient)
     {
         $this->meetupClient = $meetupClient;
-        $this->meetupGroupRepo = $groupRepository;
     }
 
-    public function syncEvents() {
-
-        $em = $this->meetupGroupRepo->createQueryBuilder('mg')->getEntityManager();
-        $groups = $this->meetupGroupRepo->findAll();
-        foreach($groups as $group) {
-            /** @var MeetupGroup $group */
-            $events = $this->meetupClient->getGroupEvents(['urlname' => $group->getUrlname(), 'status' => 'past,upcoming', 'page' => 25])->getData();
-            foreach($events as $ev) {
-                $meetupEvent = MeetupEvent::deserializeFromApi($ev);
-                $em->persist($meetupEvent);
-                $group->addEvent($meetupEvent);
-
-            }
+    public function syncEvents(MeetupGroup $meetupGroup) {
+        /** @var MeetupGroup $group */
+        $events = $this->meetupClient->getGroupEvents(['urlname' => $meetupGroup->getUrlname(), 'status' => 'past,upcoming', 'page' => 25])->getData();
+        foreach($events as $ev) {
+            $meetupEvent = MeetupEvent::deserializeFromApi($ev);
+            $meetupGroup->addEvent($meetupEvent);
         }
-        $em->flush();
-        return $groups;
+        return $meetupGroup;
+    }
+
+    public function getMeetupGroup(string $urlAlias) : MeetupGroup {
+        $response = $this->meetupClient->getGroup(['urlname' => $urlAlias])->getData();
+
+        $meetupGroup = new MeetupGroup();
+        $meetupGroup->setUrlname($response['urlname']);
+        $meetupGroup->setId($response['id']);
+        $meetupGroup->setName($response['name']);
+        $meetupGroup->setCreated((new \DateTime)->setTimestamp($response['created']/1000));
+        $meetupGroup->setDescription($response['description']);
+
+        return $meetupGroup;
     }
 }

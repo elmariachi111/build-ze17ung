@@ -15,7 +15,7 @@ class MeetupEvent
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id", type="string", length=50)
      * @ORM\Id
      */
     private $id;
@@ -274,8 +274,6 @@ class MeetupEvent
         return $this;
     }
 
-
-
     /**
      * Get waitlistCount
      *
@@ -310,8 +308,8 @@ class MeetupEvent
         //$event->setHowToFindUs($apiEvent['how_to_find_us']);
         $event->setLink($apiEvent['link']);
         $event->setStatus($apiEvent['status']);
-        //$event->setWaitlistCount($apiEvent['waitlist_count']);
-        //$event->setYesRsvpCount($apiEvent['yes_rsvp_count']);
+        $event->setWaitlistCount($apiEvent['waitlist_count']);
+        $event->setYesRsvpCount($apiEvent['yes_rsvp_count']);
 
         $time = new \DateTime('@' . $apiEvent['time']/1000);
         $event->setTime($time);

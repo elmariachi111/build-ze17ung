@@ -34,6 +34,9 @@ framework:
     php_errors:
         log: true
 
+    serializer: { enable_annotations: true }
+
+
 # Twig Configuration
 twig:
     debug: '%kernel.debug%'
@@ -58,6 +61,8 @@ doctrine:
     mappings:
       AppBundle:
         type: annotation
+
+
 
 
 # Swiftmailer Configuration
