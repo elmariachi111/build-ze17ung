@@ -77,6 +77,25 @@ class MeetupEvent
     private $waitlistCount;
 
     /**
+     * @var string
+     * @ORM\Column(name="venue_name", type="string", length=255, nullable=true)
+     */
+    private $venueName;
+
+    /**
+     * @var string
+     * @ORM\Column(name="venue_address", type="string", length=255, nullable=true)
+     */
+    private $venueAddress;
+
+    /**
+     * @var array
+     * @ORM\Column(name="venue_location", type="json_array", nullable=true)
+     */
+    private $venueLocation;
+
+    /**
+     * @var MeetupGroup
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\MeetupGroup", inversedBy="events")
      * @ORM\JoinColumn(name="meetupgroup_urlname", referencedColumnName="urlname")
      */
@@ -285,6 +304,54 @@ class MeetupEvent
     }
 
     /**
+     * @return string
+     */
+    public function getVenueName()
+    {
+        return $this->venueName;
+    }
+
+    /**
+     * @param string $venueName
+     */
+    public function setVenueName(string $venueName)
+    {
+        $this->venueName = $venueName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVenueAddress()
+    {
+        return $this->venueAddress;
+    }
+
+    /**
+     * @param string $venueAddress
+     */
+    public function setVenueAddress(string $venueAddress)
+    {
+        $this->venueAddress = $venueAddress;
+    }
+
+    /**
+     * @return array
+     */
+    public function getVenueLocation()
+    {
+        return $this->venueLocation;
+    }
+
+    /**
+     * @param array $venueLocation
+     */
+    public function setVenueLocation(array $venueLocation)
+    {
+        $this->venueLocation = $venueLocation;
+    }
+
+    /**
      * @return mixed
      */
     public function getMeetupGroup()
@@ -300,6 +367,7 @@ class MeetupEvent
         $this->meetupGroup = $meetupGroup;
     }
 
+
     public static function deserializeFromApi(array $apiEvent) {
         $event = new self;
         $event->id = $apiEvent['id'];
@@ -310,6 +378,15 @@ class MeetupEvent
         $event->setStatus($apiEvent['status']);
         $event->setWaitlistCount($apiEvent['waitlist_count']);
         $event->setYesRsvpCount($apiEvent['yes_rsvp_count']);
+
+        if (isset($apiEvent['venue'])) {
+            $event->setVenueAddress($apiEvent['venue']['address_1'] . ' ' . $apiEvent['venue']['city']);
+            $event->setVenueName($apiEvent['venue']['name']);
+            $event->setVenueLocation([
+                'lat' => $apiEvent['venue']['lat'],
+                'lon' => $apiEvent['venue']['lon'],
+            ]);
+        }
 
         $time = new \DateTime('@' . $apiEvent['time']/1000);
         $event->setTime($time);

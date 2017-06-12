@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\MeetupEvent;
 use AppBundle\Entity\MeetupGroup;
 use AppBundle\Services\MeetupService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -25,10 +26,15 @@ class MeetupController extends Controller
      */
     public function meetupAction(Request $request)
     {
-        $events = $this->get(MeetupService::class)->syncEvents();
+        $events = $this->getDoctrine()->getRepository(MeetupEvent::class)
+            ->createQueryBuilder('e')
+            ->where('e.time > CURRENT_TIMESTAMP()')
+            ->orderBy('e.time', 'asc')
+            ->getQuery()->execute()
+        ;
 
         return [
-            'calendar' => $events
+            'events' => $events
         ];
     }
 }

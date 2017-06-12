@@ -31,7 +31,7 @@ class MeetupService
      */
     public function syncEvents(MeetupGroup $meetupGroup) : array {
         /** @var MeetupGroup $group */
-        $events = $this->meetupClient->getGroupEvents(['urlname' => $meetupGroup->getUrlname(), 'status' => 'past,upcoming', 'page' => 25])->getData();
+        $events = $this->meetupClient->getGroupEvents(['urlname' => $meetupGroup->getUrlname(), 'status' => 'upcoming', 'page' => 25])->getData();
         $ret = [];
         foreach($events as $ev) {
             $meetupEvent = MeetupEvent::deserializeFromApi($ev);

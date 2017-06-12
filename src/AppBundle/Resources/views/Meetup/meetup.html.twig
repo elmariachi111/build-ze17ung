@@ -1,6 +1,7 @@
 <h2>Upcoming Meetups</h2>
-{% for meetup in calendar %}
-    <h2>{{ meetup.name }}</h2>
-    <p>{{ meetup.venue.name }} ({{ meetup.venue.address_1 }})</p>
-    <a href="{{ meetup.link }}" class="btn btn-default" target="_blank">zum Meetup</a>
+{% for event in events %}
+    <h2>{{ event.meetupGroup.name }}</h2>
+    <p>{{ event.venueName }}: ({{ event.venueAddress }})</p>
+    <p>{{ event.time|date }}</p>
+    <a href="{{ event.link }}" class="btn btn-default" target="_blank">zum Event</a>
 {% endfor %}
