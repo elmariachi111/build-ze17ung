@@ -48,10 +48,10 @@ class AppKernel extends Kernel
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-	$envFile = __DIR__.'/../.env';
-	if (file_exists($envFile)) {
-		(new Dotenv())->load($envFile);
-	}
+        $envFile = __DIR__.'/../.env';
+        if (file_exists($envFile)) {
+            (new Dotenv())->load($envFile);
+        }
         $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
     }
 }
