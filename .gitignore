@@ -16,4 +16,5 @@
 web/res
 web/bundles
 node_modules
-
+.env
+.idea
