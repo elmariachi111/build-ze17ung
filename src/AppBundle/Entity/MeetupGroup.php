@@ -143,8 +143,6 @@ class MeetupGroup
         $this->description = $description;
     }
 
-
-
     /**
      * @return ArrayCollection
      */
@@ -162,21 +160,8 @@ class MeetupGroup
     }
 
     public function addEvent(MeetupEvent $event) {
-        $existing = $this->getEvents()->filter(function(MeetupEvent $e) use ($event) {
-           return $e->getId() == $event->getId();
-        });
-        if ($existing->count() == 1) {
-            /** @var MeetupEvent $e */
-            $e = $existing->first();
-            $e->setTime($event->getTime());
-            $e->setYesRsvpCount($event->getYesRsvpCount());
-            $e->setWaitlistCount($event->getWaitlistCount());
-            $e->setDescription($event->getDescription());
-            $e->setLink($event->getLink());
-        } else {
-            $this->events->add($event);
-        }
         $event->setMeetupGroup($this);
+        $this->events->add($event);
     }
 
 }

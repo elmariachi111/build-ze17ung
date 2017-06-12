@@ -2,6 +2,7 @@
 
 namespace AppBundle\Command;
 
+use AppBundle\Entity\MeetupEvent;
 use AppBundle\Entity\MeetupGroup;
 use AppBundle\Services\MeetupService;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -55,12 +56,10 @@ class SyncMeetupCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         $meetupGroup = $em->getRepository(MeetupGroup::class)->find($groupUrlAlias);
 
-        $group = $this->getContainer()->get(MeetupService::class)->syncEvents($meetupGroup);
+        $events = $this->getContainer()->get(MeetupService::class)->syncEvents($meetupGroup);
+        foreach($events as $event) {
+            $em->merge($event);
+        }
         $em->flush();
-
-        /*
-         * $groups = $this->meetupGroupRepo->findAll();
-        foreach($groups as $group) {
-         */
     }
 }

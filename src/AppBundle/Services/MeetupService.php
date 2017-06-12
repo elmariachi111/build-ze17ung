@@ -25,14 +25,20 @@ class MeetupService
         $this->meetupClient = $meetupClient;
     }
 
-    public function syncEvents(MeetupGroup $meetupGroup) {
+    /**
+     * @param MeetupGroup $meetupGroup
+     * @return MeetupEvent[]
+     */
+    public function syncEvents(MeetupGroup $meetupGroup) : array {
         /** @var MeetupGroup $group */
         $events = $this->meetupClient->getGroupEvents(['urlname' => $meetupGroup->getUrlname(), 'status' => 'past,upcoming', 'page' => 25])->getData();
+        $ret = [];
         foreach($events as $ev) {
             $meetupEvent = MeetupEvent::deserializeFromApi($ev);
-            $meetupGroup->addEvent($meetupEvent);
+            $meetupEvent->setMeetupGroup($meetupGroup);
+            $ret[] = $meetupEvent;
         }
-        return $meetupGroup;
+        return $ret;
     }
 
     public function getMeetupGroup(string $urlAlias) : MeetupGroup {
