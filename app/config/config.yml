@@ -48,7 +48,7 @@ doctrine:
     default_connection: default
     connections:
       default:
-        url: %env(database_url)%
+        url: %env(DATABASE_URL)%
 
   orm:
     default_entity_manager: ~
