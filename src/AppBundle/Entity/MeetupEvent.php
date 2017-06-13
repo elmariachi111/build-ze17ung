@@ -388,7 +388,9 @@ class MeetupEvent
             ]);
         }
 
-        $time = new \DateTime('@' . $apiEvent['time']/1000);
+        $timeStamp = '@' . $apiEvent['time']/1000;
+        $time = new \DateTime($timeStamp);
+        $time->setTimezone(new \DateTimeZone('Europe/Berlin') );
         $event->setTime($time);
         return $event;
     }

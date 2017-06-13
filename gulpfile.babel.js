@@ -50,6 +50,7 @@ gulp.task('build', [
   'copy',
   'imagemin',
   'sass',
+  'fonts',
   'browserify'
 ]);
 

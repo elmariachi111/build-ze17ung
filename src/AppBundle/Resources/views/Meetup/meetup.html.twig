@@ -1,7 +1,19 @@
 <h2>Upcoming Meetups</h2>
+<table class="table table-condensed">
 {% for event in events %}
-    <h2>{{ event.meetupGroup.name }}</h2>
-    <p>{{ event.venueName }}: ({{ event.venueAddress }})</p>
-    <p>{{ event.time|date }}</p>
-    <a href="{{ event.link }}" class="btn btn-default" target="_blank">zum Event</a>
+    <tr>
+        <td>{{ event.meetupGroup.name }}</td>
+        <td>{{ event.time|date }}</td>
+        <td><a data-toggle="tooltip" title="{{ event.venueAddress }}">{{ event.venueName }}</a></td>
+        <td><a href="{{ event.link }}" target="_blank"><i class="glyphicon glyphicon-circle-arrow-right"></i></a></td>
+    </tr>
 {% endfor %}
+</table>
+
+<p>Hier gelistete Gruppen
+<ul class="list-inline pull-left">
+    {% for group in groups %}
+        <li><a href="//www.meetup.com/{{ group.urlname }}" target="_blank">{{ group.name }}</a></li>
+    {% endfor %}
+</ul>
+</p>

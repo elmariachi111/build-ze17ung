@@ -33,8 +33,12 @@ class MeetupController extends Controller
             ->getQuery()->execute()
         ;
 
+        $groups = $this->getDoctrine()->getRepository(MeetupGroup::class)->findAll();
+
         return [
-            'events' => $events
+            'events' => $events,
+            'groups' => $groups
+
         ];
     }
 }

@@ -2,6 +2,7 @@
   "name": "build-zeitung",
   "version": "0.0.1",
   "dependencies": {
+    "bootstrap": "^4.0.0-alpha.6",
     "bootstrap-sass": "^3.3.7",
     "jquery": "~3.1.1",
     "lodash": "^4.17.4",
@@ -75,7 +76,8 @@
       "//": "Directories relative to `source` directory",
       "images": "images",
       "styles": "css",
-      "scripts": "js"
+      "scripts": "js",
+      "fonts": "fonts"
     },
     "entries": {
       "js": "main**.js",
