@@ -28,8 +28,11 @@ class MeetupController extends Controller
     {
         $events = $this->getDoctrine()->getRepository(MeetupEvent::class)
             ->createQueryBuilder('e')
-            ->where('e.time > CURRENT_TIMESTAMP()')
+            ->where('e.time > :from')
+            ->andWhere('e.time < :until')
             ->orderBy('e.time', 'asc')
+            ->setParameter(':from', new \DateTime('first day of this month'))
+            ->setParameter(':until', new \DateTime('+3 month'))
             ->getQuery()->execute()
         ;
 

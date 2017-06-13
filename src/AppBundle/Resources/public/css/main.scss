@@ -1,3 +1,7 @@
-@import 'theme/_journal';
-@import 'node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
-@import 'theme/_bootswatch';
+//@import 'theme/_journal';
+@import 'node_modules/bootstrap/scss/_variables';
+$brand-primary: $orange;
+@import 'node_modules/bootstrap/scss/bootstrap';
+
+//@import 'theme/_bootswatch';
+@import 'node_modules/font-awesome/scss/font-awesome';

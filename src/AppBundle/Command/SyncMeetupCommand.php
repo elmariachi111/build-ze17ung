@@ -32,12 +32,12 @@ class SyncMeetupCommand extends ContainerAwareCommand
         $groupUrlAlias = $input->getArgument('group');
 
         switch ($input->getArgument('cmd')) {
-            case self::COMMAND_ADD_GROUP: return $this->addGroup($groupUrlAlias); break;
-            case self::COMMAND_SYNC_EVENTS: return $this->syncEvents($groupUrlAlias); break;
+            case self::COMMAND_ADD_GROUP: return $this->addGroup($groupUrlAlias, $output); break;
+            case self::COMMAND_SYNC_EVENTS: return $this->syncEvents($groupUrlAlias, $output); break;
         }
     }
 
-    protected function addGroup($groupUrlAlias) {
+    protected function addGroup($groupUrlAlias, OutputInterface $output) {
 
         $exists = null !=$this->getContainer()->get('doctrine.orm.entity_manager')->getRepository(MeetupGroup::class)->find($groupUrlAlias);
 
@@ -47,19 +47,33 @@ class SyncMeetupCommand extends ContainerAwareCommand
         $em->flush();
 
         if (!$exists) {
-            $this->syncEvents($groupUrlAlias);
+            $this->syncEvents($groupUrlAlias, $output);
         }
     }
 
-    protected function syncEvents($groupUrlAlias = null)
+    protected function syncEvents($groupUrlAlias = null, OutputInterface $output)
     {
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
-        $meetupGroup = $em->getRepository(MeetupGroup::class)->find($groupUrlAlias);
+        if (null !== $groupUrlAlias) {
+            $meetupGroup = $em->getRepository(MeetupGroup::class)->find($groupUrlAlias);
+            $this->syncGroup($meetupGroup, $output);
+        } else {
+            $groups = $em->getRepository(MeetupGroup::class)->findAll();
+            foreach($groups as $meetupGroup) {
+                $this->syncGroup($meetupGroup, $output);
+            }
+        }
 
+        $em->flush();
+    }
+
+    private function syncGroup(MeetupGroup $meetupGroup, OutputInterface $output) {
+        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
+        $output->write("Syncing {$meetupGroup->getName()}... ");
         $events = $this->getContainer()->get(MeetupService::class)->syncEvents($meetupGroup);
         foreach($events as $event) {
             $em->merge($event);
         }
-        $em->flush();
+        $output->writeln(count($events) . " Done.");
     }
 }

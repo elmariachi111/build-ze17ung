@@ -1,9 +1,12 @@
 {% extends '@App/master.html.twig' %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-md-6">
+    <div class="row mt-2">
+        <div class="col-8">
             {{ render(controller('AppBundle:Meetup:meetup')) }}
+        </div>
+        <div class="col-4">
+
         </div>
     </div>
 {% endblock %}

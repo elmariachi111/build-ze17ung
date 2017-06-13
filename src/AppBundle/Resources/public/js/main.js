@@ -1,6 +1,7 @@
 'use strict';
 
 import $ from 'jquery';
+import 'tether';
 import 'bootstrap';
 import _ from 'lodash';
 

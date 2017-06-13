@@ -4,9 +4,11 @@
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.6",
     "bootstrap-sass": "^3.3.7",
+    "font-awesome": "^4.7.0",
     "jquery": "~3.1.1",
     "lodash": "^4.17.4",
-    "normalize.css": "~5.0.0"
+    "normalize.css": "~5.0.0",
+    "tether-browserify": "^0.6.7"
   },
   "devDependencies": {
     "autoprefixer": "~6.7.5",
@@ -90,11 +92,16 @@
     ]
   },
   "browser": {
-    "bootstrap": "./node_modules/bootstrap-sass/assets/javascripts/bootstrap.js"
+    "bootstrap": "./node_modules/bootstrap/dist/js/bootstrap.js",
+    "tether": "./node_modules/tether/dist/js/tether.js"
   },
   "browserify-shim": {
     "bootstrap": {
       "exports": null,
+      "depends": "jquery:jQuery"
+    },
+    "tether": {
+      "exports": "Tether",
       "depends": "jquery:jQuery"
     }
   }
