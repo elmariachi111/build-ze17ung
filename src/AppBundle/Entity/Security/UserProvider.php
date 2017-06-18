@@ -40,6 +40,8 @@ class UserProvider extends BaseFOSUBProvider
         $userEmail = $response->getEmail();
         $user = $this->userManager->findUserByEmail($userEmail);
 
+        $serviceName = $response->getResourceOwner()->getName();
+
         // if null just create new user and set it properties
         if (null === $user) {
             $username = $response->getRealName();
@@ -48,13 +50,14 @@ class UserProvider extends BaseFOSUBProvider
             $user->setEmail($userEmail);
             $user->setPassword('');
             $user->setEnabled(true);
-            // ... save user to database
-
+            $idPath = $response->getPath('identifier');
+            $setter = 'set' . ucfirst($serviceName) . 'Id';
+            $user->$setter($response->getResponse()[$idPath]);//update user id
         }
-        // else update access token of existing user
-        $serviceName = $response->getResourceOwner()->getName();
+        // else update props of existing user
         $setter = 'set' . ucfirst($serviceName) . 'AccessToken';
         $user->$setter($response->getAccessToken());//update access token
+
         $user->setProfilePicture($response->getProfilePicture());
 
         return $user;
