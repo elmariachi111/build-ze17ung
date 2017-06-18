@@ -15,7 +15,7 @@
                 <img src="{{ app.user.profilePicture }}" width="30" height="30" class="d-inline-block align-top rounded-circle" alt="" />
                     {{ app.user.username }}
             {% else %}
-                <a href="{{ hwi_oauth_login_url('github') }}" class="btn btn-black"><i class="fa fa-github"></i> Login</a>
+                {% include '@App/_loginButton.html.twig' %}
             {% endif %}
         </span>
     </div>

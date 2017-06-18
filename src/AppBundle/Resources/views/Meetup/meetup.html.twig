@@ -9,10 +9,31 @@
 {% endfor %}
 </table>
 
-<p>Hier gelistete Gruppen
-<ul class="list-inline pull-left">
-    {% for group in groups %}
-        <li><a href="//www.meetup.com/{{ group.urlname }}" target="_blank">{{ group.name }}</a></li>
-    {% endfor %}
-</ul>
-</p>
+<div class="row">
+    <div class="col">
+        <h3>Hier gelistete Gruppen</h3>
+        <ul class="list-inline pull-left">
+            {% for group in groups %}
+                <li><a href="//www.meetup.com/{{ group.urlname }}" target="_blank">{{ group.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+<div class="row">
+    <div class="col">
+        {{ form_start(form, {attr: {class: 'form-inline'} }) }}
+            {{ form_widget(form.url) }}
+            {{ form_widget(form.submit, {'attr': {'class': 'btn-primary' } } ) }}
+        {{ form_end(form) }}
+
+    </div>
+</div>
+{% else %}
+    <div class="row">
+        <div class="col">
+            {% include '@App/_loginButton.html.twig' %} to submit a new meetup group
+        </div>
+    </div>
+{% endif %}
