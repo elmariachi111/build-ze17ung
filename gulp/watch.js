@@ -13,12 +13,6 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync) {
         path.join(dirs.source, dirs.styles, '**/*.{scss,sass}'),
       ], ['sass']);
 
-      // Nunjucks Templates
-      gulp.watch([
-        path.join(dirs.source, '**/*.nunjucks'),
-      ], ['nunjucks']);
-      
-
       // Copy
       gulp.watch([
         path.join(dirs.source, '**/*'),

@@ -11,19 +11,8 @@ import glob from 'glob';
 // Load all gulp plugins based on their names
 // EX: gulp-copy -> copy
 const plugins = gulpLoadPlugins();
-// Create karma server
-const KarmaServer = require('karma').Server;
 
-const defaultNotification = function(err) {
-  return {
-    subtitle: err.plugin,
-    message: err.message,
-    sound: 'Funk',
-    onLast: true,
-  };
-};
-
-let config = Object.assign({}, pjson.config, defaultNotification);
+let config = Object.assign({}, pjson.config);
 
 let args = minimist(process.argv.slice(2));
 let dirs = config.directories;
@@ -65,9 +54,5 @@ gulp.task('serve', [
 
 // Testing
 gulp.task('test', ['eslint'], (done) => {
-  new KarmaServer({
-    configFile: path.join(__dirname, '/karma.conf.js'),
-    singleRun: !args.watch,
-    autoWatch: args.watch
-  }, done).start();
+
 });
