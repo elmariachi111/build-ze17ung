@@ -80,16 +80,18 @@ class MeetupController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $exists = null !=$em->getRepository(MeetupGroup::class)->find($groupUrlAlias);
-        $group = $this->get(MeetupService::class)->getMeetupGroup($groupUrlAlias);
-        $em->merge($group);
-        $em->flush();
-        if (!$exists) {
-            $events = $this->get(MeetupService::class)->syncEvents($group);
-            foreach($events as $event) {
-                $em->merge($event);
-            }
+        $group = $em->getRepository(MeetupGroup::class)->find($groupUrlAlias);
+        if (!$group) {
+            $group = $this->get(MeetupService::class)->getMeetupGroup($groupUrlAlias);
+            $em->merge($group);
+            $em->flush();
         }
+
+        $events = $this->get(MeetupService::class)->syncEvents($group);
+        foreach($events as $event) {
+            $em->merge($event);
+        }
+
         $em->flush();
         return $this->redirectToRoute('homepage');
     }
