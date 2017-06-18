@@ -26,13 +26,16 @@ class MeetupController extends Controller
      */
     public function meetupAction(Request $request)
     {
+        $from = new \DateTime('first day of this month');
+        $to = new \DateTime('+3 month');
+
         $events = $this->getDoctrine()->getRepository(MeetupEvent::class)
             ->createQueryBuilder('e')
             ->where('e.time > :from')
             ->andWhere('e.time < :until')
             ->orderBy('e.time', 'asc')
-            ->setParameter(':from', new \DateTime('first day of this month'))
-            ->setParameter(':until', new \DateTime('+3 month'))
+            ->setParameter(':from', $from)
+            ->setParameter(':until', $to)
             ->getQuery()->execute()
         ;
 
@@ -40,7 +43,8 @@ class MeetupController extends Controller
 
         return [
             'events' => $events,
-            'groups' => $groups
+            'groups' => $groups,
+            'range' => ['from' => $from, 'to' => $to]
 
         ];
     }

@@ -63,3 +63,32 @@ doctrine:
 # Swiftmailer Configuration
 swiftmailer:
 
+fos_user:
+    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    firewall_name: secured_area
+    user_class: AppBundle\Entity\Security\User
+    registration:
+      confirmation:
+        enabled: false
+
+    from_email:
+        address: "stadolf@gmail.com"
+        sender_name: "Stefan"
+
+hwi_oauth:
+  connect:
+    account_connector: app_bundle.oauth_user_provider
+  # list of names of the firewalls in which this bundle is active, this setting MUST be set
+  firewall_names: [secured_area]
+  resource_owners:
+    github:
+      type:          github
+      client_id:     %env(GITHUB_CLIENT_ID)%
+      client_secret: %env(GITHUB_CLIENT_SECRET)%
+      scope:         'user:email,public_repo'
+      options:
+        csrf: true
+  fosub:
+    username_iterations: 30
+    properties:
+      github: github_id

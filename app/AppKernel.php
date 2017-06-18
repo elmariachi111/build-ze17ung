@@ -16,6 +16,8 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
 
             new AppBundle\AppBundle(),
         ];
@@ -30,6 +32,17 @@ class AppKernel extends Kernel
 
         return $bundles;
     }
+
+    public function boot()
+    {
+        $envFile = __DIR__.'/../.env';
+        if (file_exists($envFile)) {
+            (new Dotenv())->load($envFile);
+        }
+
+        return parent::boot();
+    }
+
 
     public function getRootDir()
     {
@@ -48,10 +61,6 @@ class AppKernel extends Kernel
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $envFile = __DIR__.'/../.env';
-        if (file_exists($envFile)) {
-            (new Dotenv())->load($envFile);
-        }
         $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
     }
 }

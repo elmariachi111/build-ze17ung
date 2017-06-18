@@ -19,3 +19,7 @@ services:
   AppBundle\Repository\MeetupGroupRepository:
     factory: ['@doctrine', getRepository]
     arguments: ['AppBundle:MeetupGroup']
+
+  app_bundle.oauth_user_provider:
+    class:        AppBundle\Entity\Security\UserProvider
+    arguments: ['@fos_user.user_manager', { github: github_id }]

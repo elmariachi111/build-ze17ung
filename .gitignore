@@ -18,3 +18,4 @@ web/bundles
 node_modules
 .env
 .idea
+.web-server-pid

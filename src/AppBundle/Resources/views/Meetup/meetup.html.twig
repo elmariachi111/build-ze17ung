@@ -1,4 +1,4 @@
-<h2>Upcoming Meetups</h2>
+<h2>Upcoming Meetups <small>{{ range.from|date('d.m.Y') }} - {{ range.to|date('d.m.Y') }}</small></h2>
 <table class="table table-sm">
 {% for event in events %}
     <tr>
