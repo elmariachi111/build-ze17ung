@@ -20,6 +20,20 @@ services:
     factory: ['@doctrine', getRepository]
     arguments: ['AppBundle:MeetupGroup']
 
+  AppBundle\Services\MercuryExcerptService:
+    arguments: ['@mercury_client']
+
+  mercury_client:
+    class: GuzzleHttp\Client
+    arguments:
+      -
+        timeout: 30
+        allow_redirects: true
+        base_uri: https://mercury.postlight.com
+        headers:
+          x-api-key:
+
+
   app_bundle.oauth_user_provider:
     class:        AppBundle\Entity\Security\UserProvider
     arguments: ['@fos_user.user_manager', { github: github_id }]
