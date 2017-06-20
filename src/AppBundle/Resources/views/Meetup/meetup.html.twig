@@ -31,9 +31,5 @@
     </div>
 </div>
 {% else %}
-    <div class="row">
-        <div class="col">
-            {% include '@App/_loginButton.html.twig' %} to submit a new meetup group
-        </div>
-    </div>
+    {% include '@App/components/_login_hint.html.twig' with { 'login_hint': 'to submit a new meetup group'} %}
 {% endif %}

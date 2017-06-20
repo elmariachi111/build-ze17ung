@@ -1,6 +1,12 @@
+homepage:
+  path: '/'
+  defaults:
+    _controller: FrameworkBundle:Template:template
+    template:    '@App/homepage.html.twig'
+
 app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+  resource: '@AppBundle/Controller/'
+  type: annotation
 
 hwi_oauth_redirect:
     resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
