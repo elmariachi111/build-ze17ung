@@ -21,19 +21,34 @@ services:
     arguments: ['AppBundle:MeetupGroup']
 
   AppBundle\Services\MercuryExcerptService:
-    arguments: ['@mercury_client']
-
-  mercury_client:
-    class: GuzzleHttp\Client
-    arguments:
-      -
-        timeout: 30
-        allow_redirects: true
-        base_uri: https://mercury.postlight.com
-        headers:
-          x-api-key:
+    arguments: ['@guzzle', 'https://mercury.postlight.com',  '%env(MERCURY_API_KEY)%' ]
 
 
   app_bundle.oauth_user_provider:
     class:        AppBundle\Entity\Security\UserProvider
     arguments: ['@fos_user.user_manager', { github: github_id }]
+
+  guzzle:
+    class: GuzzleHttp\Client
+    arguments:
+      -
+        timeout: 30
+        allow_redirects: true
+        handler: '@guzzle.stack'
+
+  guzzle.stack:
+    public: false
+    class: GuzzleHttp\HandlerStack
+    factory: [ GuzzleHttp\HandlerStack, create ]
+    calls:
+      - [ push, [ '@guzzle.logger' ] ]
+
+  guzzle.message_formatter:
+    public: false
+    class: GuzzleHttp\MessageFormatter
+
+  guzzle.logger:
+    public: false
+    class: callback
+    arguments: ['@logger', '@guzzle.message_formatter']
+    factory: [GuzzleHttp\Middleware, 'log']

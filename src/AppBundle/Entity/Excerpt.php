@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Excerpt
- *
+ * @ORM\Entity()
  * @ORM\Table(name="excerpt")
  *
  */
@@ -17,8 +17,9 @@ class Excerpt
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="string", length=50)
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
@@ -32,14 +33,14 @@ class Excerpt
     /**
      * @var string
      *
-     * @ORM\Column(name="author", type="string", length=255)
+     * @ORM\Column(name="author", type="string", length=255, nullable=true)
      */
     protected $author;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_published", type="date", nullable=true)
+     * @ORM\Column(name="date_published", type="datetime", nullable=true)
      */
     protected $datePublished;
 
@@ -67,7 +68,7 @@ class Excerpt
     /**
      * @var string
      *
-     * @ORM\Column(name="url", type="string")
+     * @ORM\Column(name="domain", type="string")
      */
     protected $domain;
 
@@ -104,25 +105,25 @@ class Excerpt
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAuthor(): string
+    public function getAuthor()
     {
         return $this->author;
     }
 
     /**
-     * @param string $author
+     * @param string|null $author
      */
-    public function setAuthor(string $author)
+    public function setAuthor($author)
     {
         $this->author = $author;
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getDatePublished(): \DateTime
+    public function getDatePublished()
     {
         return $this->datePublished;
     }
@@ -209,9 +210,7 @@ class Excerpt
         $excerpt->setExcerpt($apiExcerpt['excerpt']);
         $excerpt->setLeadImageUrl($apiExcerpt['lead_image_url']);
         if (!empty($apiExcerpt['date_published'])) {
-            $timeStamp = '@' . $apiExcerpt['date_published']/1000;
-            $time = new \DateTime($timeStamp);
-            $time->setTimezone(new \DateTimeZone('Europe/Berlin') );
+            $time = new \DateTime($apiExcerpt['date_published']);
             $excerpt->setDatePublished($time);
         }
 

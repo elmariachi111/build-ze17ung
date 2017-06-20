@@ -2,11 +2,13 @@
 
 {% block content %}
     <div class="row mt-2">
-        <div class="col-8">
+        <div class="col-12">
             {{ render(controller('AppBundle:Meetup:meetup')) }}
         </div>
-        <div class="col-4">
-
+    </div>
+    <div class="row mt-2">
+        <div class="col-12">
+            {{ render(controller('AppBundle:Excerpt:index')) }}
         </div>
     </div>
 {% endblock %}

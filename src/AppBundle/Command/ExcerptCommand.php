@@ -11,12 +11,12 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ArticleCommand extends ContainerAwareCommand
+class ExcerptCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('app:article')
+            ->setName('app:excerpt')
             ->addArgument('url', InputArgument::REQUIRED,'url')
             ->setDescription('add an article');
     }
@@ -27,8 +27,11 @@ class ArticleCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $url = $input->getArgument('url');
-        $resp = $this->getContainer()->get(MercuryExcerptService::class)->getExcerpt($url);
+        $excerpt = $this->getContainer()->get(MercuryExcerptService::class)->getExcerpt($url);
 
+        $em = $this->getContainer()->get('doctrine')->getManager();
+        $em->persist($excerpt);
+        $em->flush();
     }
 
 }

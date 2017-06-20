@@ -17,14 +17,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class MeetupController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
-     * @Template()
-     */
-    public function indexAction() {
-        return [];
-    }
-
-    /**
      * @param Request $request
      * @Template()
      */
