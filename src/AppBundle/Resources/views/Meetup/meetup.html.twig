@@ -1,7 +1,7 @@
 <h2>Upcoming Meetups <small>{{ range.from|date('d.m.Y') }} - {{ range.to|date('d.m.Y') }}</small></h2>
 <table class="table table-sm">
 {% for event in events %}
-    <tr>
+    <tr class="{{ event.past ? 'muted' }}">
         <td>{{ event.meetupGroup.name }}</td>
         <td><a href="{{ event.link }}" target="_blank">{{ event.time|date('D d.m.Y H:i') }}</a></td>
         <td><a data-toggle="tooltip" title="{{ event.venueAddress }}">{{ event.venueName }}</a></td>
@@ -14,7 +14,9 @@
         <h3>Hier gelistete Gruppen</h3>
         <ul class="list-inline pull-left">
             {% for group in groups %}
-                <li><a href="//www.meetup.com/{{ group.urlname }}" target="_blank">{{ group.name }}</a></li>
+                <li>
+                    <a href="//www.meetup.com/{{ group.urlname }}" target="_blank">{{ group.name }}</a>
+                </li>
             {% endfor %}
         </ul>
     </div>

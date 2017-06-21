@@ -14,3 +14,11 @@ $brand-black: #333;
 
 //@import 'theme/_bootswatch';
 @import 'node_modules/font-awesome/scss/font-awesome';
+
+table {
+  tr.muted {
+    background-color: $gray-lightest;
+    opacity: .5;
+    font-size: 0.8rem;
+  }
+}

@@ -367,6 +367,9 @@ class MeetupEvent
         $this->meetupGroup = $meetupGroup;
     }
 
+    public function isPast() {
+        return ($this->getTime() < new \DateTime());
+    }
 
     public static function deserializeFromApi(array $apiEvent) {
         $event = new self;
