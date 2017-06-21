@@ -3,15 +3,16 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+//@ORM\Entity(repositoryClass="AppBundle\Repository\MeetupEventRepository")
+
 /**
- * Excerpt
  * @ORM\Entity()
  * @ORM\Table(name="excerpt")
- *
  */
-//@ORM\Entity(repositoryClass="AppBundle\Repository\MeetupEventRepository")
 class Excerpt
 {
     /**
@@ -71,6 +72,21 @@ class Excerpt
      * @ORM\Column(name="domain", type="string")
      */
     protected $domain;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", inversedBy="excerpts")
+     * @ORM\JoinTable(name="excerpts_tags",
+     *     joinColumns={@ORM\JoinColumn(name="excerpt_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="tag_slug", referencedColumnName="slug")}
+     * )
+     */
+    protected $tags;
+
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -198,6 +214,28 @@ class Excerpt
     public function setDomain(string $domain)
     {
         $this->domain = $domain;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param Collection $tags
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+    }
+
+
+    public function addTag(Tag $tag) {
+        $this->tags->add($tag);
+        $tag->addExcerpt($this);
     }
 
     public static function deserializeFromApi(array $apiExcerpt) {

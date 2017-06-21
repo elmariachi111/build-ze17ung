@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 
@@ -54,13 +55,23 @@ class MeetupGroup
     private $events;
 
     /**
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", inversedBy="meetupGroups")
+     * @ORM\JoinTable(name="meetupgroups_tags",
+     *     joinColumns={@ORM\JoinColumn(name="meetupgroup_urlname", referencedColumnName="urlname")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="tag_slug", referencedColumnName="slug")}
+     * )
+     */
+    protected $tags;
+
+    /**
      * MeetupGroup constructor.
      */
     public function __construct()
     {
         $this->events = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
-
 
     public function setUrlname($urlname)
     {
@@ -144,7 +155,7 @@ class MeetupGroup
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
     public function getEvents()
     {
@@ -152,16 +163,38 @@ class MeetupGroup
     }
 
     /**
-     * @param ArrayCollection $events
+     * @param Collection $events
      */
     public function setEvents($events)
     {
         $this->events = $events;
     }
 
+    /**
+     * @return Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param  $tags
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+    }
+
+
     public function addEvent(MeetupEvent $event) {
         $event->setMeetupGroup($this);
         $this->events->add($event);
+    }
+
+    public function addTag(Tag $tag) {
+        $this->tags->add($tag);
+        $tag->addMeetupGroup($this);
     }
 
 }
