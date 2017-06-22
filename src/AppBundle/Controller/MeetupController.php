@@ -59,7 +59,7 @@ class MeetupController extends Controller
     /**
      * @Route("/new", name="meetup_new")
      * @Method("POST")
-     * @Security("has_role('IS_AUTHENTICATED_FULLY')")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      *
      * @Template()
      */
