@@ -17,6 +17,10 @@ security:
             security: false
 
         secured_area:
+            remember_me:
+              secret: %secret%
+              lifetime: 604800
+              always_remember_me: true
             anonymous: ~
             oauth:
                 resource_owners:

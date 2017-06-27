@@ -59,7 +59,7 @@ class MeetupController extends Controller
     /**
      * @Route("/new", name="meetup_new")
      * @Method("POST")
-     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
      *
      * @Template()
      */
@@ -96,7 +96,7 @@ class MeetupController extends Controller
     /**
      * @Route("/{id}/tag", name="meetupgroup_modify_tag")
      * @Method({"POST","DELETE"})
-     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
      *
      * @return  Response
      */

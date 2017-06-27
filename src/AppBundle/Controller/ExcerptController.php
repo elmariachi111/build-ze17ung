@@ -42,7 +42,7 @@ class ExcerptController extends Controller
     /**
      * @Route("/convert", name="excerpt_convert")
      * @Method("POST")
-     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
      *
      * @return Response
      */
@@ -63,7 +63,7 @@ class ExcerptController extends Controller
     /**
      * @Route("/{id}/tag", name="excerpt_modify_tag")
      * @Method({"POST","DELETE"})
-     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
      *
      * @return Response
      */
