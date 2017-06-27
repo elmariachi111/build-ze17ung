@@ -25,9 +25,8 @@ framework:
     trusted_hosts: ~
     trusted_proxies: ~
     session:
-        # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
-        handler_id:  session.handler.native_file
-        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+      handler_id: snc_redis.session.handler
+
     fragments: ~
     http_method_override: true
     assets: ~
@@ -59,9 +58,6 @@ doctrine:
       AppBundle:
         type: annotation
 
-
-
-
 # Swiftmailer Configuration
 swiftmailer:
 
@@ -76,6 +72,17 @@ fos_user:
     from_email:
         address: "stadolf@gmail.com"
         sender_name: "Stefan"
+
+snc_redis:
+  clients:
+    default:
+      type: predis
+      alias: session
+      dsn: %env(REDIS_URL)%
+
+  session:
+    client: session
+    prefix: sess
 
 hwi_oauth:
   connect:
