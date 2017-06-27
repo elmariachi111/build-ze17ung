@@ -39,19 +39,20 @@ class UserProvider extends BaseFOSUBProvider
     {
         $userEmail = $response->getEmail();
         $user = $this->userManager->findUserByEmail($userEmail);
-
         $serviceName = $response->getResourceOwner()->getName();
 
-        // if null just create new user and set it properties
-        if (null === $user) {
-            $username = $response->getRealName();
+        if (null === $user) { // if null just create new user and set its properties
             $user = new User();
-            $user->setUsername($username);
+
+            $user->setUsername($response->getUsername());
+            $user->setRealName($response->getRealName());
             $user->setEmail($userEmail);
             $user->setPassword('');
             $user->setEnabled(true);
-            $idPath = $response->getPath('identifier');
+
             $setter = 'set' . ucfirst($serviceName) . 'Id';
+
+            $idPath = $response->getPath('resource_owner_id');
             $user->$setter($response->getResponse()[$idPath]);//update user id
         }
         // else update props of existing user

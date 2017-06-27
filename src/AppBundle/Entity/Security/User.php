@@ -20,6 +20,12 @@ class User extends BaseUser
 
     /**
      * @var string
+     * @ORM\Column(name="real_name", type="string", nullable=true)
+     */
+    protected $realName;
+
+    /**
+     * @var string
      * @ORM\Column(name="github_id", type="string", nullable=true)
      */
     protected $githubId;
@@ -85,5 +91,23 @@ class User extends BaseUser
     {
         $this->profilePicture = $profilePicture;
     }
+
+    /**
+     * @return string
+     */
+    public function getRealName()
+    {
+        return $this->realName;
+    }
+
+    /**
+     * @param string $realName
+     */
+    public function setRealName($realName)
+    {
+        $this->realName = $realName;
+    }
+
+
 
 }

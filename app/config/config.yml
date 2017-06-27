@@ -97,6 +97,10 @@ hwi_oauth:
       scope:         'user:email,public_repo'
       options:
         csrf: true
+      paths:
+        identifier: login
+        resource_owner_id: id
+
   fosub:
     username_iterations: 30
     properties:
