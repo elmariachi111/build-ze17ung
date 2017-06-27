@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1dd9efb908e41b1669ff4790a051775d",
+    "content-hash": "3f191207497564ae9600c28f05763c44",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -1119,16 +1119,16 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "6.2.3",
+            "version": "6.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "8d6c6cc55186db87b7dc5009827429ba4e9dc006"
+                "reference": "f4db5a78a5ea468d4831de7f0bf9d9415e348699"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/8d6c6cc55186db87b7dc5009827429ba4e9dc006",
-                "reference": "8d6c6cc55186db87b7dc5009827429ba4e9dc006",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/f4db5a78a5ea468d4831de7f0bf9d9415e348699",
+                "reference": "f4db5a78a5ea468d4831de7f0bf9d9415e348699",
                 "shasum": ""
             },
             "require": {
@@ -1138,8 +1138,11 @@
             },
             "require-dev": {
                 "ext-curl": "*",
-                "phpunit/phpunit": "^4.0",
+                "phpunit/phpunit": "^4.0 || ^5.0",
                 "psr/log": "^1.0"
+            },
+            "suggest": {
+                "psr/log": "Required for using the Log middleware"
             },
             "type": "library",
             "extra": {
@@ -1177,7 +1180,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2017-02-28T22:50:30+00:00"
+            "time": "2017-06-22T18:50:49+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -1596,16 +1599,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.22.1",
+            "version": "1.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "1e044bc4b34e91743943479f1be7a1d5eb93add0"
+                "reference": "fd8c787753b3a2ad11bc60c063cff1358a32a3b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/1e044bc4b34e91743943479f1be7a1d5eb93add0",
-                "reference": "1e044bc4b34e91743943479f1be7a1d5eb93add0",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/fd8c787753b3a2ad11bc60c063cff1358a32a3b4",
+                "reference": "fd8c787753b3a2ad11bc60c063cff1358a32a3b4",
                 "shasum": ""
             },
             "require": {
@@ -1626,7 +1629,7 @@
                 "phpunit/phpunit-mock-objects": "2.3.0",
                 "ruflin/elastica": ">=0.90 <3.0",
                 "sentry/sentry": "^0.13",
-                "swiftmailer/swiftmailer": "~5.3"
+                "swiftmailer/swiftmailer": "^5.3|^6.0"
             },
             "suggest": {
                 "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
@@ -1670,7 +1673,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2017-03-13T07:08:03+00:00"
+            "time": "2017-06-19T01:22:40+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -1719,6 +1722,56 @@
                 "random"
             ],
             "time": "2017-03-13T16:27:32+00:00"
+        },
+        {
+            "name": "predis/predis",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nrk/predis.git",
+                "reference": "f0210e38881631afeafb56ab43405a92cafd9fd1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nrk/predis/zipball/f0210e38881631afeafb56ab43405a92cafd9fd1",
+                "reference": "f0210e38881631afeafb56ab43405a92cafd9fd1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8"
+            },
+            "suggest": {
+                "ext-curl": "Allows access to Webdis when paired with phpiredis",
+                "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Predis\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniele Alessandri",
+                    "email": "suppakilla@gmail.com",
+                    "homepage": "http://clorophilla.net"
+                }
+            ],
+            "description": "Flexible and feature-complete Redis client for PHP and HHVM",
+            "homepage": "http://github.com/nrk/predis",
+            "keywords": [
+                "nosql",
+                "predis",
+                "redis"
+            ],
+            "time": "2016-06-16T16:22:20+00:00"
         },
         {
             "name": "psr/cache",
@@ -2175,6 +2228,73 @@
             ],
             "description": "A security checker for your composer.lock",
             "time": "2017-03-31T14:50:32+00:00"
+        },
+        {
+            "name": "snc/redis-bundle",
+            "version": "dev-heroku-redis-url",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/iKlaus/SncRedisBundle.git",
+                "reference": "c3f82c598f71ff7f135d85b55d936431e0b2649c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/iKlaus/SncRedisBundle/zipball/c3f82c598f71ff7f135d85b55d936431e0b2649c",
+                "reference": "c3f82c598f71ff7f135d85b55d936431e0b2649c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "symfony/framework-bundle": "^2.7 || ^3.0",
+                "symfony/yaml": "^2.7 || ^3.0"
+            },
+            "require-dev": {
+                "doctrine/cache": "1.*",
+                "phpunit/phpunit": "4.8.*",
+                "predis/predis": "^1.0",
+                "symfony/console": "^2.7 || ^3.0",
+                "symfony/phpunit-bridge": "^2.7 || ^3.0"
+            },
+            "suggest": {
+                "monolog/monolog": "If you want to use the monolog redis handler.",
+                "predis/predis": "If you want to use predis.",
+                "symfony/console": "If you want to use commands to interact with the redis database"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Snc\\RedisBundle\\": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Henrik Westphal",
+                    "email": "henrik.westphal@gmail.com"
+                },
+                {
+                    "name": "Community contributors",
+                    "homepage": "https://github.com/snc/SncRedisBundle/contributors"
+                }
+            ],
+            "description": "A Redis bundle for Symfony",
+            "homepage": "https://github.com/snc/SncRedisBundle",
+            "keywords": [
+                "nosql",
+                "redis",
+                "symfony"
+            ],
+            "support": {
+                "source": "https://github.com/iKlaus/SncRedisBundle/tree/heroku-redis-url"
+            },
+            "time": "2017-06-12 15:15:04"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2908,128 +3028,6 @@
     ],
     "packages-dev": [
         {
-            "name": "league/oauth2-client",
-            "version": "2.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thephpleague/oauth2-client.git",
-                "reference": "313250eab923e673a5c0c8f463f443ee79f4383f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/oauth2-client/zipball/313250eab923e673a5c0c8f463f443ee79f4383f",
-                "reference": "313250eab923e673a5c0c8f463f443ee79f4383f",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^6.0",
-                "paragonie/random_compat": "^1|^2",
-                "php": ">=5.6.0"
-            },
-            "require-dev": {
-                "eloquent/liberator": "^2.0",
-                "eloquent/phony": "^0.14.1",
-                "jakub-onderka/php-parallel-lint": "~0.9",
-                "phpunit/phpunit": "^5.0",
-                "squizlabs/php_codesniffer": "^2.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-2.x": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "League\\OAuth2\\Client\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alex Bilbie",
-                    "email": "hello@alexbilbie.com",
-                    "homepage": "http://www.alexbilbie.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Woody Gilk",
-                    "homepage": "https://github.com/shadowhand",
-                    "role": "Contributor"
-                }
-            ],
-            "description": "OAuth 2.0 Client Library",
-            "keywords": [
-                "Authentication",
-                "SSO",
-                "authorization",
-                "identity",
-                "idp",
-                "oauth",
-                "oauth2",
-                "single sign on"
-            ],
-            "time": "2017-04-25T14:43:14+00:00"
-        },
-        {
-            "name": "league/oauth2-github",
-            "version": "2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thephpleague/oauth2-github.git",
-                "reference": "e63d64f3ec167c09232d189c6b0c397458a99357"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/oauth2-github/zipball/e63d64f3ec167c09232d189c6b0c397458a99357",
-                "reference": "e63d64f3ec167c09232d189c6b0c397458a99357",
-                "shasum": ""
-            },
-            "require": {
-                "league/oauth2-client": "^2.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "~0.9",
-                "phpunit/phpunit": "~4.0",
-                "squizlabs/php_codesniffer": "~2.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "League\\OAuth2\\Client\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Steven Maguire",
-                    "email": "stevenmaguire@gmail.com",
-                    "homepage": "https://github.com/stevenmaguire"
-                }
-            ],
-            "description": "Github OAuth 2.0 Client Provider for The PHP League OAuth2-Client",
-            "keywords": [
-                "authorisation",
-                "authorization",
-                "client",
-                "github",
-                "oauth",
-                "oauth2"
-            ],
-            "time": "2017-01-26T01:14:51+00:00"
-        },
-        {
             "name": "sensio/generator-bundle",
             "version": "v3.1.4",
             "source": {
@@ -3149,6 +3147,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "snc/redis-bundle": 20,
         "symfony/dotenv": 10
     },
     "prefer-stable": true,

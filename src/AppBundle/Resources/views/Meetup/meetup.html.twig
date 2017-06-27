@@ -22,7 +22,7 @@
     </div>
 </div>
 
-{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 <div class="row">
     <div class="col">
         {{ form_start(form, {attr: {class: 'form-inline'} }) }}
