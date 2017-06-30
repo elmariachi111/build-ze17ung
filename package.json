@@ -1,101 +1,42 @@
 {
   "name": "build-zeitung",
   "version": "0.0.1",
+  "description": "build-zeitung =============",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
   "dependencies": {
+    "@symfony/webpack-encore": "git://github.com/davidmpaz/webpack-encore.git#e44bd3895f69b08102a753ac675d3856e1cae6ff",
+    "autoprefixer": "^7.1.1",
+    "babel-core": "^6.25.0",
+    "babel-eslint": "^7.2.3",
+    "babel-preset-es2015": "^6.24.1",
     "bootstrap": "^4.0.0-alpha.6",
-    "bootstrap-sass": "^3.3.7",
     "font-awesome": "^4.7.0",
-    "jquery": "~3.1.1",
+    "jquery": "^3.2.1",
     "lodash": "^4.17.4",
-    "normalize.css": "~5.0.0",
-    "tether-browserify": "^0.6.7"
+    "node-sass": "^4.5.3",
+    "normalize.css": "^5.0.0",
+    "postcss-loader": "^2.0.6",
+    "sass-loader": "^6.0.6",
+    "tether": "^1.4.0"
   },
-  "devDependencies": {
-    "autoprefixer": "~6.7.5",
-    "babel-core": "~6.23.1",
-    "babel-eslint": "~7.1.1",
-    "babel-plugin-add-module-exports": "~0.2.1",
-    "babel-preset-es2015": "~6.22.0",
-    "babelify": "~7.3.0",
-    "browser-sync": "~2.18.0",
-    "browserify": "~14.1.0",
-    "browserify-shim": "^3.8.13",
-    "del": "~2.2.2",
-    "envify": "~4.0.0",
-    "foldero": "~0.1.1",
-    "glob": "~7.1.1",
-    "gulp": "~3.9.1",
-    "gulp-changed": "~2.0.0",
-    "gulp-cssnano": "~2.1.2",
-    "gulp-data": "~1.2.1",
-    "gulp-eslint": "~3.0.1",
-    "gulp-htmlmin": "~3.0.0",
-    "gulp-if": "~2.0.2",
-    "gulp-imagemin": "~3.1.1",
-    "gulp-load-plugins": "~1.5.0",
-    "gulp-plumber": "~1.1.0",
-    "gulp-postcss": "~6.3.0",
-    "gulp-rename": "~1.2.2",
-    "gulp-sass": "~3.1.0",
-    "gulp-sourcemaps": "~2.4.1",
-    "gulp-uglify": "~2.0.1",
-    "gulp-util": "~3.0.8",
-    "jasmine-core": "2.5.2",
-    "js-yaml": "~3.8.1",
-    "karma": "~1.5.0",
-    "karma-browserify": "~5.1.1",
-    "karma-jasmine": "~1.1.0",
-    "minimist": "~1.2.0",
-    "rimraf": "~2.6.1",
-    "vinyl-buffer": "~1.0.0",
-    "vinyl-source-stream": "~1.1.0",
-    "watchify": "~3.9.0 ",
-    "yo": "1.8.5"
-  },
+  "browserslist": [
+    "last 2 versions",
+    "ios >= 8"
+  ],
   "scripts": {
-    "clean-deps": "rimraf node_modules"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "engines": {
-    "node": ">=0.12.0"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elmariachi111/build-ze17ung.git"
   },
-  "//": "CUSTOM CONFIGURATION",
-  "config": {
-    "//": "Entry files",
-    "host": "127.0.0.1",
-    "port": "3000",
-    "baseUrl": "./",
-    "directories": {
-      "source": "src/AppBundle/Resources/public",
-      "destination": "web/res",
-      "temporary": "web/res",
-      "//": "Directories relative to `source` directory",
-      "images": "images",
-      "styles": "css",
-      "scripts": "js",
-      "fonts": "fonts"
-    },
-    "entries": {
-      "js": "main**.js",
-      "css": "main**.{sass,scss}"
-    }
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elmariachi111/build-ze17ung/issues"
   },
-  "browserify": {
-    "transform": [
-      "browserify-shim"
-    ]
-  },
-  "browser": {
-    "bootstrap": "./node_modules/bootstrap/dist/js/bootstrap.js",
-    "tether": "./node_modules/tether/dist/js/tether.js"
-  },
-  "browserify-shim": {
-    "bootstrap": {
-      "exports": null,
-      "depends": "jquery:jQuery"
-    },
-    "tether": {
-      "exports": "Tether",
-      "depends": "jquery:jQuery"
-    }
-  }
+  "homepage": "https://github.com/elmariachi111/build-ze17ung#readme"
 }
