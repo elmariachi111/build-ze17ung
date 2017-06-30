@@ -63,7 +63,7 @@
             "@symfony-scripts"
         ],
         "compile": [
-            "npm install --dev && node_modules/.bin/gulp --production"
+            "npm install && node_modules/.bin/encore production"
         ]
     },
     "config": {

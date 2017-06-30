@@ -1,8 +1,8 @@
 //@import 'theme/_journal';
-@import 'node_modules/bootstrap/scss/_variables';
+@import '~bootstrap/scss/_variables';
 $brand-primary: $orange;
 $brand-black: #333;
-@import 'node_modules/bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/bootstrap';
 
 .btn-black {
   @include button-variant($btn-primary-color, $brand-black, $brand-black);
@@ -12,8 +12,8 @@ $brand-black: #333;
   @include button-outline-variant($brand-black);
 }
 
-//@import 'theme/_bootswatch';
-@import 'node_modules/font-awesome/scss/font-awesome';
+$fa-font-path: "~font-awesome/fonts";
+@import '~font-awesome/scss/font-awesome';
 
 table {
   tr.muted {

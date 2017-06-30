@@ -12,7 +12,8 @@
     <title>Build-Zeitung</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{{ asset('res/css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('build/global.css') }}" rel="stylesheet">
+    <link href="{{ asset('build/app.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -20,8 +21,9 @@
 {% block navbar %}
     {% include '@App/navbar.html.twig' %}
 {% endblock %}
-
+<h1 ></h1>
 <div class="container">
+    <p data-toggle="tooltip" title="whoa">Wow</p>
     {% block content %}{% endblock %}
     <hr>
     <footer>
@@ -29,7 +31,10 @@
     </footer>
 </div> <!-- /container -->
 
+{% block javascripts %}
+<script src="{{ asset('build/manifest.js') }}"></script>
+<script src="{{ asset('build/vendor.js') }}"></script>
+{% endblock %}
 
-<script src="{{ asset('res/js/main.js') }}"></script>
 </body>
 </html>
