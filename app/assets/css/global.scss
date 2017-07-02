@@ -17,6 +17,8 @@ body {
   @include button-outline-variant($brand-black);
 }
 
+$fa-font-path: "~font-awesome/fonts";
+@import '~font-awesome/scss/font-awesome';
 
 table {
   &.no-border {
