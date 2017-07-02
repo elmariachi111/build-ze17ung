@@ -1,43 +1,51 @@
-<h2>Article excerpts <small class="text-muted">latest first</small></h2>
-<div class="card-columns">
-{% for excerpt in excerpts %}
-    <div class="card">
-        <img class="card-img-top img-fluid" src="{{ excerpt.leadImageUrl }}" alt="{{ excerpt.title }}">
-        <div class="card-block">
-            <h4 class="card-title">{{ excerpt.title }}</h4>
-            <p class="card-text">{{ excerpt.excerpt }}</p>
+<section class="excerpts container">
+
+    <div class="row my-4 align-items-center">
+        <div class="col-6 offset-3">
+            <h2 class="section-header">
+                Article excerpts <small>latest first</small>
+            </h2>
         </div>
-        <div class="card-footer">
-            <small class="text-muted">
-                <ul class="list-inline">
-                    <li>{{ excerpt.author }}</li>
-                    <li><a href="{{ excerpt.url }}">{{ excerpt.url|slice(0, 40) }}</a></li>
-                    <li>{{ excerpt.datePublished ? excerpt.datePublished|date('d.m.Y H:i') }}</li>
-                </ul>
-                <div class="tags">
-                    {% for tag in excerpt.tags %}
-                        <span class="badge badge-pill badge-default">{{ tag.slug }}</span>
-                    {% endfor %}
-                </div>
-                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                    {% include '@App/components/_add_tag_form.html.twig' with( { 'form_action': path("excerpt_modify_tag", {id : excerpt.id}) }) %}
-                {% endif %}
-            </small>
+
+        <div class="col-xs-4">
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                {{ form_start(form, {attr: {class: 'form-inline'} }) }}
+                {{ form_widget(form.url) }}
+                {{ form_widget(form.submit, {'attr': {'class': 'btn-primary' } } ) }}
+                {{ form_end(form) }}
+            {% else %}
+                {% include '@App/components/_login_hint.html.twig' with { 'login_hint': 'to submit a new article'} %}
+            {% endif %}
         </div>
     </div>
-{% endfor %}
-</div>
 
-{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-    <div class="row">
-        <div class="col">
-            {{ form_start(form, {attr: {class: 'form-inline'} }) }}
-            {{ form_widget(form.url) }}
-            {{ form_widget(form.submit, {'attr': {'class': 'btn-primary' } } ) }}
-            {{ form_end(form) }}
-
+    <div class="card-columns">
+    {% for excerpt in excerpts %}
+        <div class="card">
+            <img class="card-img-top img-fluid" src="{{ excerpt.leadImageUrl }}" alt="{{ excerpt.title }}">
+            <div class="card-block">
+                <h4 class="card-title">{{ excerpt.title }}</h4>
+                <p class="card-text">{{ excerpt.excerpt }}</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">
+                    <ul class="list-inline">
+                        <li>{{ excerpt.author }}</li>
+                        <li><a href="{{ excerpt.url }}">{{ excerpt.url|slice(0, 40) }}</a></li>
+                        <li>{{ excerpt.datePublished ? excerpt.datePublished|date('d.m.Y H:i') }}</li>
+                    </ul>
+                    <div class="tags">
+                        {% for tag in excerpt.tags %}
+                            <span class="badge badge-pill badge-default">{{ tag.slug }}</span>
+                        {% endfor %}
+                    </div>
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                        {% include '@App/components/_add_tag_form.html.twig' with( { 'form_action': path("excerpt_modify_tag", {id : excerpt.id}) }) %}
+                    {% endif %}
+                </small>
+            </div>
         </div>
+    {% endfor %}
     </div>
-{% else %}
-    {% include '@App/components/_login_hint.html.twig' with { 'login_hint': 'to submit a new article'} %}
-{% endif %}
+
+</section>

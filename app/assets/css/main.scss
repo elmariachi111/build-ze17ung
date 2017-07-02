@@ -1,3 +1,36 @@
-h1 {
-  color: red;
+@import '_variables';
+
+.card {
+  .card-block {
+    color: $gray-dark;
+  }
+  .card-footer {
+    a {
+      color: $brand-primary;
+    }
+  }
+}
+
+h2.section-header {
+  text-align:center;
+  small {
+    display: block;
+    font-size: 60%;
+    color: darken($body-color, 10%);
+  }
+
+}
+
+section.section-banner {
+  padding: 30px 0px;
+  margin-left: -10px;
+  margin-right: -10px;
+
+  &.section-white {
+    background-color: $white;
+    color: $black;
+    a {
+      color: $brand-primary;
+    }
+  }
 }

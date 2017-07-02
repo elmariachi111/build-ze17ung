@@ -1,8 +1,13 @@
-//@import 'theme/_journal';
-@import '~bootstrap/scss/_variables';
-$brand-primary: $orange;
-$brand-black: #333;
+@import '_variables';
+
 @import '~bootstrap/scss/bootstrap';
+
+$fa-font-path: "~font-awesome/fonts";
+@import '~font-awesome/scss/font-awesome';
+
+body {
+  background: linear-gradient(45deg, $body-bg 0%,$brand-primary 100%);
+}
 
 .btn-black {
   @include button-variant($btn-primary-color, $brand-black, $brand-black);
@@ -12,10 +17,13 @@ $brand-black: #333;
   @include button-outline-variant($brand-black);
 }
 
-$fa-font-path: "~font-awesome/fonts";
-@import '~font-awesome/scss/font-awesome';
 
 table {
+  &.no-border {
+    td {
+      border: none;
+    }
+  }
   tr.muted {
     background-color: $gray-lightest;
     opacity: .5;
