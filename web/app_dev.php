@@ -24,7 +24,13 @@ Debug::enable();
 
 $kernel = new AppKernel('dev', true);
 $kernel->loadClassCache();
+
+Request::setTrustedHeaderName(Request::HEADER_FORWARDED, null);
+Request::setTrustedHeaderName(Request::HEADER_CLIENT_HOST, null);
+
 $request = Request::createFromGlobals();
+Request::setTrustedProxies(array($request->server->get('REMOTE_ADDR')));
+
 $response = $kernel->handle($request);
 $response->send();
 $kernel->terminate($request, $response);
