@@ -168,6 +168,12 @@ class Excerpt
         $this->leadImageUrl = $leadImageUrl;
     }
 
+    public function getOwnedLeadImageUrl() : string
+    {
+        $options = ['type' => 'fetch'];
+        $fetched = cloudinary_url_internal($this->getLeadImageUrl(), $options);
+        return $fetched;
+    }
     /**
      * @return string
      */
