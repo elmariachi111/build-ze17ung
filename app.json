@@ -1,0 +1,44 @@
+{
+  "name": "build-ze17ung",
+  "scripts": {
+  },
+  "env": {
+    "CLOUDINARY_URL": {
+      "required": true
+    },
+    "GITHUB_CLIENT_ID": {
+      "required": true
+    },
+    "GITHUB_CLIENT_SECRET": {
+      "required": true
+    },
+    "MEETUP_API_KEY": {
+      "required": true
+    },
+    "MERCURY_API_KEY": {
+      "required": true
+    },
+    "REDIS_URL": {
+      "required": true
+    },
+    "SYMFONY_ENV": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+    "cloudinary",
+    "heroku-postgresql",
+    "heroku-redis",
+    "scheduler"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "heroku/php"
+    }
+  ]
+}
