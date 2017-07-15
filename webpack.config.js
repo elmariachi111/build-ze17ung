@@ -29,6 +29,7 @@ Encore
     jQuery: 'jquery',
     'window.jQuery': 'jquery',
     Tether: 'tether', tether: 'tether',
+    'salvattore': 'salvattore',
     _: 'lodash'
   })
 
@@ -39,7 +40,8 @@ Encore
   .createSharedEntry('vendor', [
     'jquery',
     'bootstrap',
-    'tether'
+    'tether',
+    'salvattore'
   ])
 
 // create hashed filenames (e.g. app.abc123.css)

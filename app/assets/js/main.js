@@ -7,6 +7,7 @@ global.$ = global.jQuery = $;
 
 import 'tether';
 import 'bootstrap';
+import 'salvattore';
 
 import _ from 'lodash';
 

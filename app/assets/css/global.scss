@@ -32,3 +32,33 @@ table {
     font-size: 0.8rem;
   }
 }
+
+.salvattore-grid[data-columns] {
+  @include media-breakpoint-up(xs){
+    &::before {
+      content: '1 .column.size-1of1';
+    }
+  }
+  @include media-breakpoint-between(sm, lg){
+    &::before {
+      content: '2 .column.size-1of2';
+    }
+  }
+  @include media-breakpoint-up(lg){
+    &::before {
+      content: '3 .column.size-1of3';
+    }
+  }
+
+  .column { float: left; }
+  .size-1of1 { width: 100%; }
+  .size-1of2 { width: 50%; }
+  .size-1of3 { width: 33.333%; }
+
+  .card {
+    margin-bottom: $card-columns-margin;
+    @include media-breakpoint-up(xs){
+      margin: $card-columns-margin;
+    }
+  }
+}
