@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b17e2dc869cf73f6ae423f1c4de7339a",
+    "content-hash": "d741a5ca3078976508eee775e20f7037",
     "packages": [
         {
             "name": "cloudinary/cloudinary_php",
@@ -2283,16 +2283,16 @@
         },
         {
             "name": "snc/redis-bundle",
-            "version": "dev-heroku-redis-url",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/iKlaus/SncRedisBundle.git",
-                "reference": "c3f82c598f71ff7f135d85b55d936431e0b2649c"
+                "url": "https://github.com/snc/SncRedisBundle.git",
+                "reference": "25a1aa07c3c9e1019934f547439ed1069a99043f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/iKlaus/SncRedisBundle/zipball/c3f82c598f71ff7f135d85b55d936431e0b2649c",
-                "reference": "c3f82c598f71ff7f135d85b55d936431e0b2649c",
+                "url": "https://api.github.com/repos/snc/SncRedisBundle/zipball/25a1aa07c3c9e1019934f547439ed1069a99043f",
+                "reference": "25a1aa07c3c9e1019934f547439ed1069a99043f",
                 "shasum": ""
             },
             "require": {
@@ -2323,6 +2323,7 @@
                     "Snc\\RedisBundle\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2343,10 +2344,7 @@
                 "redis",
                 "symfony"
             ],
-            "support": {
-                "source": "https://github.com/iKlaus/SncRedisBundle/tree/heroku-redis-url"
-            },
-            "time": "2017-06-12 15:15:04"
+            "time": "2017-07-12 06:40:26"
         },
         {
             "name": "swiftmailer/swiftmailer",

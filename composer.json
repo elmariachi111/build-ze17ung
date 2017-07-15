@@ -35,7 +35,7 @@
         "predis/predis": "^1.0",
         "sensio/distribution-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^3.0.2",
-        "snc/redis-bundle": "dev-heroku-redis-url",
+        "snc/redis-bundle": "dev-master",
         "symfony/dotenv": "^3.3@beta",
         "symfony/monolog-bundle": "^3.0.2",
         "symfony/polyfill-apcu": "^1.0",
@@ -83,10 +83,5 @@
         },
         "branch-alias": null
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:iKlaus/SncRedisBundle.git"
-        }
-    ]
+    "repositories": []
 }
