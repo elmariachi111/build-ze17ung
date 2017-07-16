@@ -10,7 +10,9 @@ import 'bootstrap';
 import 'salvattore';
 
 import _ from 'lodash';
+import InfiniteList from './infinite-list.js';
 
 $(() => {
   $('[data-toggle="tooltip"]').tooltip();
+  const loadMore = new InfiniteList($('[data-toggle="infinite-list"]'))
 });
