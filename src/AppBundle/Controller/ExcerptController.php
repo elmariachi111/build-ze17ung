@@ -37,6 +37,8 @@ class ExcerptController extends Controller
         $excerpts = $repo->findBy([], ['id' => 'DESC'], $limit, $offset);
         return $this->render("AppBundle:Excerpt:$template.html.twig",[
             'form' => $form->createView(),
+            'offset' => $offset + $limit,
+            'limit'  => $limit,
             'excerpts' => $excerpts
         ]);
     }

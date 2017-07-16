@@ -1,32 +1,7 @@
 <div class="row">
     <div class="col">
-        <div class="salvattore-grid" id="excerpt-grid" data-columns>
-        {% for excerpt in excerpts %}
-            <div class="card">
-                <img class="card-img-top img-fluid" src="{{ excerpt.ownedLeadImageUrl }}" alt="{{ excerpt.title }}">
-                <div class="card-block">
-                    <h4 class="card-title">{{ excerpt.title }}</h4>
-                    <p class="card-text">{{ excerpt.excerpt }}</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">
-                        <ul class="list-inline">
-                            <li>{{ excerpt.author }}</li>
-                            <li><a href="{{ excerpt.url }}">{{ excerpt.url|slice(0, 40) }}</a></li>
-                            <li>{{ excerpt.datePublished ? excerpt.datePublished|date('d.m.Y H:i') }}</li>
-                        </ul>
-                        <div class="tags">
-                            {% for tag in excerpt.tags %}
-                                <span class="badge badge-pill badge-default">{{ tag.slug }}</span>
-                            {% endfor %}
-                        </div>
-                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                            {% include '@App/components/_add_tag_form.html.twig' with( { 'form_action': path("excerpt_modify_tag", {id : excerpt.id}) }) %}
-                        {% endif %}
-                    </small>
-                </div>
-            </div>
-        {% endfor %}
+        <div class="salvattore-grid" id="excerpt-grid" data-columns data-toggle="infinite-list">
+            {% include 'AppBundle:Excerpt:_cards.html.twig' %}
         </div>
     </div>
 </div>
