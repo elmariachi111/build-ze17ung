@@ -1,36 +1,6 @@
 @import '_variables';
 @import '~bootstrap/scss/mixins/_breakpoints';
 
-#brand-logo {
-  font-family: 'Teko', sans-serif;
-  background: repeating-linear-gradient(
-      45deg,
-      #EA2C1B,
-      #EA2C1B 10px,
-      #DE2C1B 10px,
-      #DE2C1B 20px
-  );
-  color: white;
-  text-align: center;
-  width: 100%;
-
-  .logo-build {
-    display: inline-block;
-    margin-top:7rem;
-    font-size: 11rem;
-    line-height: 8rem;
-    //letter-spacing: -0.25rem;
-    transform: scaleY(2);
-  }
-  .logo-times {
-    font-size: 2rem;
-    text-transform: uppercase;
-    letter-spacing: 2.5rem;
-    line-height: 6rem;
-    margin-left: 2rem;
-  }
-}
-
 #main-teaser {
   height:100%;
   min-height: 320px;
@@ -77,19 +47,12 @@ h2.section-header {
     font-size: 60%;
     color: darken($body-color, 10%);
   }
-
 }
 
-section.section-banner {
-  padding: 30px 0px;
-  margin-left: -10px;
-  margin-right: -10px;
-
-  &.section-white {
-    background-color: $white;
-    color: $black;
-    a {
-      color: $brand-primary;
-    }
+section.section-inverse {
+  background-color: $bz-red;
+  color: $white;
+  a {
+    color: $white;
   }
 }

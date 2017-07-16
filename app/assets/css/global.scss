@@ -5,7 +5,6 @@
 $fa-font-path: "~font-awesome/fonts";
 @import '~font-awesome/scss/font-awesome';
 
-
 .btn-black {
   @include button-variant($btn-primary-color, $brand-black, $brand-black);
 }
@@ -16,6 +15,31 @@ $fa-font-path: "~font-awesome/fonts";
 
 $fa-font-path: "~font-awesome/fonts";
 @import '~font-awesome/scss/font-awesome';
+
+#brand-logo {
+  font-family: 'Teko', sans-serif;
+  background: repeating-linear-gradient(
+      45deg, #EA2C1B, #EA2C1B 10px, #DE2C1B 10px, #DE2C1B 20px
+  );
+  color: white;
+  text-align: center;
+
+  .logo-build {
+    display: inline-block;
+    margin-top:7rem;
+    font-size: 11rem;
+    line-height: 8rem;
+    //letter-spacing: -0.25rem;
+    transform: scaleY(2);
+  }
+  .logo-times {
+    font-size: 2.1rem;
+    text-transform: uppercase;
+    letter-spacing: 2.1rem;
+    line-height: 6rem;
+    margin-left: 5%;
+  }
+}
 
 table {
   &.no-border {

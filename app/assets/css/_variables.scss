@@ -1,3 +1,4 @@
+$bz-red: #EA2C1B;
 
 $brand-primary: #66b6fc;
 $brand-secondary: red;
@@ -10,9 +11,13 @@ $body-bg: #FAFAFA; //linear-gradient(45deg, #17eac0 0%,#66b6fc 100%);
 $grid-gutter-width-base: 20px;
 //$link-color: $color-limette;
 
-$card-border-width: 0px;
-$card-bg: rgba(255,255,255,.8);
-$card-cap-bg: rgba(255,255,255,.25);
+//$card-border-width: 0px;
+//$card-bg: rgba(255,255,255,.8);
+//$card-cap-bg: rgba(255,255,255,.25);
+
+.bg-red {
+  background-color: $bz-red;
+}
 
 @import '~bootstrap/scss/_variables';
 

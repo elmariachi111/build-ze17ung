@@ -29,6 +29,6 @@ class NewExcerptForm extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'app_bundle_new_excerpt_form';
+        return null;
     }
 }

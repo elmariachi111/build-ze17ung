@@ -39,9 +39,20 @@ class MeetupController extends Controller
             ->orderBy('e.time', 'asc')
             ->setParameter(':from', $from)
             ->setParameter(':until', $to)
-            ->getQuery()->execute()
+            ->getQuery()->getResult()
         ;
 
+        return [
+            'events' => $events,
+            'range' => ['from' => $from, 'to' => $to],
+        ];
+    }
+
+    /**
+     * @param Request $request
+     * @Template()
+     */
+    public function groupsAction() {
         $groups = $this->getDoctrine()->getRepository(MeetupGroup::class)->findAll();
 
         $form = $this->createForm(NewMeetupGroupForm::class,[], [
@@ -49,9 +60,7 @@ class MeetupController extends Controller
         ]);
 
         return [
-            'events' => $events,
             'groups' => $groups,
-            'range' => ['from' => $from, 'to' => $to],
             'form'  => $form->createView()
         ];
     }

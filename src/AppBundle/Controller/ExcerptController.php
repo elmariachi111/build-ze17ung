@@ -23,35 +23,22 @@ class ExcerptController extends Controller
     /**
      * @Route("/", name="excerpt_index")
      * @Method("GET")
-     *
-     * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $repo = $this->getDoctrine()->getRepository(Excerpt::class);
         $form = $this->createForm(NewExcerptForm::class,[], [
             'action' => $this->generateUrl('excerpt_convert')
         ]);
-        $excerpts = $repo->findBy([], ['id' => 'DESC']);
-        return [
+        $limit = $request->get('limit', 25);
+        $offset = $request->get('offset', 0);
+        $template = $request->get('template', 'index');
+
+        $excerpts = $repo->findBy([], ['id' => 'DESC'], $limit, $offset);
+        return $this->render("AppBundle:Excerpt:$template.html.twig",[
             'form' => $form->createView(),
             'excerpts' => $excerpts
-        ];
-    }
-
-    /**
-     * @Route("/", name="excerpt_teaser")
-     * @Method("GET")
-     *
-     * @Template()
-     */
-    public function teaserAction()
-    {
-        $repo = $this->getDoctrine()->getRepository(Excerpt::class);
-        $excerpts = $repo->findBy([], ['id' => 'DESC'], 3);
-        return [
-            'excerpts' => $excerpts
-        ];
+        ]);
     }
 
     /**

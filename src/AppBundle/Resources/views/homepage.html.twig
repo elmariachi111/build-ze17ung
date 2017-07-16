@@ -11,7 +11,7 @@
                 </div>
                 <div class="col-lg-7 col-md-6 col-sm-12">
                     <section class="excerpts teaser" id="main-teaser">
-                    {{ render(controller('AppBundle:Excerpt:teaser')) }}
+                    {{ render(controller('AppBundle:Excerpt:index', {template:'teaser', limit: 3})) }}
                     </section>
                 </div>
             </div>
@@ -19,13 +19,18 @@
     </div>
 
     <section class="container excerpts mt-2">
-            {{ render(controller('AppBundle:Excerpt:index')) }}
+            {{ render(controller('AppBundle:Excerpt:index',{ limit: 10, offset: 3})) }}
     </section>
 
     <section class="container meetups mt-2">
         {{ render(controller('AppBundle:Meetup:meetup')) }}
     </section>
 
+    <section class="container-fluid section-banner section-inverse">
+        <div class="container py-3">
+            {{ render(controller('AppBundle:Meetup:groups')) }}
+        </div>
+    </section>
 {% endblock %}
 
 {% block javascripts %}
