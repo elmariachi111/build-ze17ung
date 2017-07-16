@@ -5,9 +5,6 @@
 $fa-font-path: "~font-awesome/fonts";
 @import '~font-awesome/scss/font-awesome';
 
-body {
-  background: linear-gradient(45deg, $body-bg 0%,$brand-primary 100%);
-}
 
 .btn-black {
   @include button-variant($btn-primary-color, $brand-black, $brand-black);

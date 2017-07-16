@@ -1,0 +1,29 @@
+<section class="section-banner section-white">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3>Hier gelistete Gruppen</h3>
+                <ul class="list-inline">
+                    {% for group in groups %}
+                        <li class="list-inline-item">
+                            <a href="//www.meetup.com/{{ group.urlname }}" target="_blank">{{ group.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <div class="row">
+                <div class="col">
+                    {{ form_start(form, {attr: {class: 'form-inline'} }) }}
+                    {{ form_widget(form.url) }}
+                    {{ form_widget(form.submit, {'attr': {'class': 'btn-primary' } } ) }}
+                    {{ form_end(form) }}
+
+                </div>
+            </div>
+        {% else %}
+            {% include '@App/components/_login_hint.html.twig' with { 'login_hint': 'to submit a new meetup group'} %}
+        {% endif %}
+    </div>
+</section>

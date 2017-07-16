@@ -1,4 +1,4 @@
-//@import 'theme/_journal';
+
 $brand-primary: #66b6fc;
 $brand-secondary: red;
 $color-limette: #b4f96d;
@@ -6,10 +6,9 @@ $color-limette: #b4f96d;
 $brand-black: #333;
 $enable-rounded: false;
 $enable-gradients: true;
-$body-bg: #ea6b1d; //linear-gradient(45deg, #17eac0 0%,#66b6fc 100%);
+$body-bg: #FAFAFA; //linear-gradient(45deg, #17eac0 0%,#66b6fc 100%);
 $grid-gutter-width-base: 20px;
-$navbar-inverse-color: rgba(white,.9);
-$link-color: $color-limette;
+//$link-color: $color-limette;
 
 $card-border-width: 0px;
 $card-bg: rgba(255,255,255,.8);
@@ -17,4 +16,4 @@ $card-cap-bg: rgba(255,255,255,.25);
 
 @import '~bootstrap/scss/_variables';
 
-$body-color: $white;
+$body-color: $black;

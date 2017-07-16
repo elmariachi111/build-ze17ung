@@ -40,6 +40,21 @@ class ExcerptController extends Controller
     }
 
     /**
+     * @Route("/", name="excerpt_teaser")
+     * @Method("GET")
+     *
+     * @Template()
+     */
+    public function teaserAction()
+    {
+        $repo = $this->getDoctrine()->getRepository(Excerpt::class);
+        $excerpts = $repo->findBy([], ['id' => 'DESC'], 3);
+        return [
+            'excerpts' => $excerpts
+        ];
+    }
+
+    /**
      * @Route("/convert", name="excerpt_convert")
      * @Method("POST")
      * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")

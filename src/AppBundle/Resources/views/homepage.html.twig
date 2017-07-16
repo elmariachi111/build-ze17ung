@@ -1,16 +1,31 @@
 {% extends '@App/master.html.twig' %}
 
 {% block content %}
-    <div class="row mt-2">
-        <div class="col-12">
-            {{ render(controller('AppBundle:Meetup:meetup')) }}
+    <div class="container-fluid">
+        <div class="row mt-2">
+              <div class="col-lg-5 col-md-6 col-sm-12">
+                    <div id="brand-logo" >
+                        <div class="logo-build">Build</div>
+                        <div class="logo-times">Zeitung</div>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <section class="excerpts teaser" id="main-teaser">
+                    {{ render(controller('AppBundle:Excerpt:teaser')) }}
+                    </section>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row mt-2">
-        <div class="col-12">
+
+    <section class="container excerpts mt-2">
             {{ render(controller('AppBundle:Excerpt:index')) }}
-        </div>
-    </div>
+    </section>
+
+    <section class="container meetups mt-2">
+        {{ render(controller('AppBundle:Meetup:meetup')) }}
+    </section>
+
 {% endblock %}
 
 {% block javascripts %}
