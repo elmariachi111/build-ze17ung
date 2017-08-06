@@ -1,5 +1,3 @@
 {% for excerpt in excerpts %}
     {% include 'AppBundle:Excerpt:_card.html.twig' %}
 {% endfor %}
-<a href="{{ path('excerpt_index', {offset: offset, limit: limit, template: '_cards'}) }}"
-   class="card btn btn-lg btn-black loadmore">More...</a>

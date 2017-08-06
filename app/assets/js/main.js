@@ -14,5 +14,5 @@ import InfiniteList from './infinite-list.js';
 
 $(() => {
   $('[data-toggle="tooltip"]').tooltip();
-  const loadMore = new InfiniteList($('[data-toggle="infinite-list"]'))
+  const loadMore = new InfiniteList({el: $('[data-toggle="infinite-list"]') })
 });

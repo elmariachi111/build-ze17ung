@@ -1,7 +1,11 @@
 <div class="row">
     <div class="col">
-        <div class="salvattore-grid" id="excerpt-grid" data-columns data-toggle="infinite-list">
+        <div class="salvattore-grid" id="excerpt-grid" data-columns data-toggle="infinite-list"
+             data-url="{{ path('excerpt_index', {template: '_cards'}) }}"
+             data-last-id="{{ excerpts|last.id }}"
+            >
             {% include 'AppBundle:Excerpt:_cards.html.twig' %}
+            <a href="#" class="card btn btn-lg btn-black loadmore">More...</a>
         </div>
     </div>
 </div>

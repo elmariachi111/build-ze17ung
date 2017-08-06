@@ -41,7 +41,9 @@ Encore
     'jquery',
     'bootstrap',
     'tether',
-    'salvattore'
+    'salvattore',
+    'lodash',
+    'backbone'
   ])
 
 // create hashed filenames (e.g. app.abc123.css)
