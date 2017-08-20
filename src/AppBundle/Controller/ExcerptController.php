@@ -5,12 +5,14 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Excerpt;
 use AppBundle\Entity\Tag;
 use AppBundle\Form\NewExcerptForm;
+use AppBundle\Repository\ExcerptRepository;
 use AppBundle\Services\MercuryExcerptService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -26,6 +28,7 @@ class ExcerptController extends Controller
      */
     public function indexAction(Request $request)
     {
+        /** @var ExcerptRepository $repo */
         $repo = $this->getDoctrine()->getRepository(Excerpt::class);
         $form = $this->createForm(NewExcerptForm::class,[], [
             'action' => $this->generateUrl('excerpt_convert')
@@ -33,12 +36,16 @@ class ExcerptController extends Controller
         $limit = $request->get('limit', 25);
         $offset = $request->get('offset', 0);
         $template = $request->get('template', 'index');
+        $before = $request->get('before', null);
 
-        $excerpts = $repo->findBy([], ['id' => 'DESC'], $limit, $offset);
+        if ($before) {
+            $excerpts = $repo->before($before)->setMaxResults($limit)->orderBy('e.id', 'DESC')->getQuery()->execute();
+        } else {
+            $excerpts = $repo->findBy([], ['id' => 'DESC'], $limit, $offset);
+        }
+
         return $this->render("AppBundle:Excerpt:$template.html.twig",[
             'form' => $form->createView(),
-            'offset' => $offset + $limit,
-            'limit'  => $limit,
             'excerpts' => $excerpts
         ]);
     }
@@ -65,16 +72,15 @@ class ExcerptController extends Controller
     }
 
     /**
-     * @Route("/{id}/tag", name="excerpt_modify_tag")
-     * @Method({"POST","DELETE"})
+     * xhr
+     *
+     * @Route("/{id}/tag/{slug}", name="excerpt_add_tag")
+     * @Method({"PUT"})
      * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
      *
      * @return Response
      */
-    public function tagExcerptAction($id, Request $request) {
-        $slug = $request->get('slug', null);
-        if ($slug == null)
-            throw new BadRequestHttpException("You must provide a slug");
+    public function tagExcerptAction($id, $slug = null) {
 
         $em = $this->getDoctrine()->getManager();
 
@@ -90,6 +96,35 @@ class ExcerptController extends Controller
 
         $em->flush();
 
-        return $this->redirectToRoute('homepage');
+        return new JsonResponse([
+            'slug' => $tag->getSlug()
+        ]);
+    }
+
+    /**
+     * xhr
+     *
+     * @Route("/{id}/tag/{slug}", name="excerpt_delete_tag")
+     * @Method({"DELETE"})
+     * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
+     *
+     * @return Response
+     */
+    public function deleteTagExcerptAction($id, $slug = null) {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $excerpt = $em->getRepository(Excerpt::class)->find($id);
+
+        $tag = $em->getRepository(Tag::class)->find($slug);
+        if ($tag != null) {
+            $excerpt->removeTag($tag);
+        }
+
+        $em->flush();
+
+        return new JsonResponse([
+            'slug' => $tag->getSlug()
+        ]);
     }
 }

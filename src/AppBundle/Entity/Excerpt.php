@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 //@ORM\Entity(repositoryClass="AppBundle\Repository\MeetupEventRepository")
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ExcerptRepository")
  * @ORM\Table(name="excerpt")
  */
 class Excerpt
@@ -244,6 +244,10 @@ class Excerpt
         $tag->addExcerpt($this);
     }
 
+    public function removeTag(Tag $tag) {
+        $this->tags->removeElement($tag);
+        $tag->removeExcerpt($this);
+    }
     public static function deserializeFromApi(array $apiExcerpt) {
 
         $excerpt = new self;

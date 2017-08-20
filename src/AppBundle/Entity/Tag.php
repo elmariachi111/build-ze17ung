@@ -104,5 +104,9 @@ class Tag
         $this->excerpts[] = $excerpt;
     }
 
+    public function removeExcerpt(Excerpt $excerpt) {
+        $this->excerpts->removeElement($excerpt);
+    }
+
 
 }

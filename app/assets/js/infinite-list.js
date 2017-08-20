@@ -1,29 +1,36 @@
 import $ from 'jquery';
 import 'salvattore';
 
-export default class InfiniteList {
+import {Card} from './card.js';
 
-  constructor($el) {
-    this.$el = $el;
-    this.activateTrigger();
+export default class InfiniteList extends Backbone.View {
+  events() {
+    return {'click a.loadmore': "loadmore" }
   }
 
-  activateTrigger() {
-    this.$trigger = this.$el.find('a.loadmore');
-    this.$trigger.on("click",this.loadmore.bind(this))
+  initialize() {
+    this.url = this.$el.data('url');
+    this.lastCardId = this.$el.data('lastId');
+    this.$loadMore = this.$('a.loadmore');
+    this.initCards(this.$('.card:not(.btn)'));
   }
 
   loadmore() {
-    const url = this.$trigger.attr('href');
-    this.$trigger.detach();
-
-    $.get(url).done(this.loaded.bind(this));
+    this.$loadMore.detach();
+    $.get(this.url, {before: this.lastCardId}).done(this.loaded.bind(this));
     return false;
+  }
+  initCards($cards) {
+    $cards.each(function() {
+      new Card({el: $(this)});
+    });
   }
 
   loaded(res, status, txt) {
     const $moreCards = $(res);
+    this.lastCardId = $moreCards.last().data('id');
     salvattore.appendElements(this.$el[0], $moreCards);
-    this.activateTrigger();
+    salvattore.appendElements(this.$el[0], this.$loadMore);
+    this.initCards($moreCards);
   }
 }
