@@ -1,0 +1,5 @@
+{% for tag in tags %}
+<li class="nav-item {% if currentTag == tag.slug %}active{% endif %}">
+    <a class="nav-link" href="{{ path('tag_show', {tag: tag.slug}) }}">{{ tag.slug|capitalize }}</a>
+</li>
+{% endfor %}

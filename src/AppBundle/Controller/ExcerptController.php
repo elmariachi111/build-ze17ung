@@ -7,6 +7,7 @@ use AppBundle\Entity\Tag;
 use AppBundle\Form\NewExcerptForm;
 use AppBundle\Repository\ExcerptRepository;
 use AppBundle\Services\MercuryExcerptService;
+use Doctrine\ORM\Query\Expr\Join;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -33,20 +34,35 @@ class ExcerptController extends Controller
         $form = $this->createForm(NewExcerptForm::class,[], [
             'action' => $this->generateUrl('excerpt_convert')
         ]);
+        $tag = $request->get('tag', null);
+
         $limit = $request->get('limit', 25);
         $offset = $request->get('offset', 0);
         $template = $request->get('template', 'index');
         $before = $request->get('before', null);
 
-        if ($before) {
-            $excerpts = $repo->before($before)->setMaxResults($limit)->orderBy('e.id', 'DESC')->getQuery()->execute();
-        } else {
-            $excerpts = $repo->findBy([], ['id' => 'DESC'], $limit, $offset);
+        $qb = $repo->createQueryBuilder('e')
+            ->setMaxResults($limit)
+            ->orderBy('e.id', 'DESC');
+
+        if ($tag) {
+            $qb->leftJoin('e.tags', 't', Join::LEFT_JOIN)
+               ->andWhere('t = :tag')
+               ->setParameter('tag', $tag);
         }
+
+        if ($before) {
+            $qb->andWhere($qb->expr()->lt('e.id', $before));
+        } else {
+            $qb->setFirstResult($offset);
+        }
+
+        $excerpts = $qb->getQuery()->execute();
 
         return $this->render("AppBundle:Excerpt:$template.html.twig",[
             'form' => $form->createView(),
-            'excerpts' => $excerpts
+            'excerpts' => $excerpts,
+            'tag' => $tag
         ]);
     }
 

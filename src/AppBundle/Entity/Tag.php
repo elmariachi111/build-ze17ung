@@ -22,6 +22,12 @@ class Tag
     protected $slug;
 
     /**
+     * @var string $name
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
+     */
+    protected $name;
+
+    /**
      * @var string $color
      * @ORM\Column(name="color", type="string", length=7, nullable=true)
      */
@@ -63,6 +69,39 @@ class Tag
     {
         $this->slug = $slug;
     }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getColor(): string
+    {
+        return $this->color;
+    }
+
+    /**
+     * @param string $color
+     */
+    public function setColor(string $color)
+    {
+        $this->color = $color;
+    }
+
 
     /**
      * @return mixed
