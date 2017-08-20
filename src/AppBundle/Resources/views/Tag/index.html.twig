@@ -1,0 +1,9 @@
+{% extends '@App/master.html.twig' %}
+
+{% block content %}
+
+    {% for tag in tags %}
+        {{ tag.slug }} <br/>
+    {% endfor %}
+
+{% endblock %}

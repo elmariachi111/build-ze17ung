@@ -2,12 +2,10 @@
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand text-center" href="#">Build-Zeitung</a>
+    <a class="navbar-brand text-center" href="{{ path('homepage') }}">Build-Zeitung</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Excerpts <span class="sr-only">(current)</span></a>
-            </li>
+            {{ render(controller('AppBundle:Tag:index', {template: '_navbar', currentTag: app.request.get('tag')|default(null), limit: 8})) }}
         </ul>
         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
             <form action="{{ path('excerpt_convert') }}" method="POST" class="form-inline mr-2">

@@ -1,0 +1,12 @@
+{% extends '@App/master.html.twig' %}
+
+{% block content %}
+<section class="container excerpts mt-2">
+    {{ render(controller('AppBundle:Excerpt:index',{tag: tag, limit: 10, offset: 0})) }}
+</section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/app.js') }}"></script>
+{% endblock %}
