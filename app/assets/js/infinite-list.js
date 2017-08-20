@@ -22,7 +22,7 @@ export default class InfiniteList extends Backbone.View {
   }
   initCards($cards) {
     $cards.each(function() {
-      new Card($(this));
+      new Card({el: $(this)});
     });
   }
 

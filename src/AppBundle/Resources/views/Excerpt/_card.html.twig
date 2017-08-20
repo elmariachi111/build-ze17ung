@@ -13,7 +13,11 @@
             </ul>
             <div class="tags">
                 {% for tag in excerpt.tags %}
-                    <span class="badge badge-pill badge-default">{{ tag.slug }}</span>
+                    <span class="badge badge-pill badge-default"><span class="slug">{{ tag.slug }}</span>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <i class="fa fa-remove"></i>
+                        {% endif %}
+                    </span>
                 {% endfor %}
             </div>
             {% if is_granted('ROLE_ADMIN') %}

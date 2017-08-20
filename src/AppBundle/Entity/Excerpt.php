@@ -244,6 +244,10 @@ class Excerpt
         $tag->addExcerpt($this);
     }
 
+    public function removeTag(Tag $tag) {
+        $this->tags->removeElement($tag);
+        $tag->removeExcerpt($this);
+    }
     public static function deserializeFromApi(array $apiExcerpt) {
 
         $excerpt = new self;

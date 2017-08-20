@@ -1,7 +1,7 @@
-<form action="{{ path("excerpt_modify_tag", {id: id}) }}" method="POST" class="form-inline" data-toggle="tag-form">
+<form action="{{ path("excerpt_add_tag", {id: id}) }}" method="POST" class="form-inline" data-toggle="tag-form">
     <input type="hidden" name="id" value="{{ id }}"/>
     <div class="input-group input-group-sm">
-        <input type="text" class="form-control" name="slug">
+        <input type="text" class="form-control" name="slug" autocomplete="off">
         <span class="input-group-btn">
             <button class="btn btn-secondary" type="submit">+ tag</button>
         </span>
