@@ -20,8 +20,14 @@ services:
     factory: ['@doctrine', getRepository]
     arguments: ['AppBundle:MeetupGroup']
 
-  AppBundle\Services\MercuryExcerptService:
-    arguments: ['@guzzle', 'https://mercury.postlight.com',  '%env(MERCURY_API_KEY)%' ]
+  AppBundle\Services\GooseExcerptService:
+    arguments: [ '@goose.client' ]
+
+  goose.client:
+    class: Goose\Client
+    arguments:
+      -
+        language: 'en'
 
 
   app_bundle.oauth_user_provider:

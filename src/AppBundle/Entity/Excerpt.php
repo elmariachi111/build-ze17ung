@@ -81,6 +81,11 @@ class Excerpt
      */
     protected $tags;
 
+    /**
+     * @var string
+     */
+    protected $fullText;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -153,7 +158,7 @@ class Excerpt
     /**
      * @return string
      */
-    public function getLeadImageUrl(): string
+    public function getLeadImageUrl()
     {
         return $this->leadImageUrl;
     }
@@ -161,7 +166,7 @@ class Excerpt
     /**
      * @param string $leadImageUrl
      */
-    public function setLeadImageUrl(string $leadImageUrl)
+    public function setLeadImageUrl($leadImageUrl)
     {
         $this->leadImageUrl = $leadImageUrl;
     }
@@ -246,21 +251,20 @@ class Excerpt
         $this->tags->removeElement($tag);
         $tag->removeExcerpt($this);
     }
-    public static function deserializeFromApi(array $apiExcerpt) {
 
-        $excerpt = new self;
-        $excerpt->setAuthor($apiExcerpt['author']);
-        $excerpt->setUrl($apiExcerpt['url']);
-        $excerpt->setDomain($apiExcerpt['domain']);
-        $excerpt->setTitle($apiExcerpt['title']);
-        $excerpt->setExcerpt($apiExcerpt['excerpt']);
-        $excerpt->setLeadImageUrl($apiExcerpt['lead_image_url']);
-        if (!empty($apiExcerpt['date_published'])) {
-            $time = new \DateTime($apiExcerpt['date_published']);
-            $excerpt->setDatePublished($time);
-        }
-
-        return $excerpt;
+    /**
+     * @return mixed
+     */
+    public function getFullText()
+    {
+        return $this->fullText;
     }
 
+    /**
+     * @param mixed $fullText
+     */
+    public function setFullText($fullText)
+    {
+        $this->fullText = $fullText;
+    }
 }

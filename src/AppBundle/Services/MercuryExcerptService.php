@@ -8,6 +8,11 @@ use AppBundle\Entity\Excerpt;
 use AppBundle\Exception\MercuryException;
 use GuzzleHttp\ClientInterface;
 
+/**
+ * @deprecated replaced with GooseExcerptService
+ * Class MercuryExcerptService
+ * @package AppBundle\Services
+ */
 class MercuryExcerptService
 {
 

@@ -6,17 +6,16 @@ use AppBundle\Entity\Excerpt;
 use AppBundle\Entity\Tag;
 use AppBundle\Form\NewExcerptForm;
 use AppBundle\Repository\ExcerptRepository;
-use AppBundle\Services\MercuryExcerptService;
+use AppBundle\Services\GooseExcerptService;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\Query\Expr\Join;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
  * @Route("/excerpt")
@@ -79,10 +78,15 @@ class ExcerptController extends Controller
         $form->handleRequest($request);
         $articleUrl = $form->getData()['url'];
 
-        $excerpt = $this->get(MercuryExcerptService::class)->getExcerpt($articleUrl);
+        $excerpt = $this->get(GooseExcerptService::class)->getExcerpt($articleUrl);
         $em = $this->getDoctrine()->getManager();
         $em->persist($excerpt);
-        $em->flush();
+
+        try {
+            $em->flush();
+        } catch(UniqueConstraintViolationException $ucve) {
+            $this->addFlash('info','article already suggested' );
+        }
 
         return $this->redirectToRoute('homepage');
     }
