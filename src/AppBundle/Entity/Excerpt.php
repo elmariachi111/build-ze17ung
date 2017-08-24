@@ -175,7 +175,7 @@ class Excerpt
     {
         $options = ['type' => 'fetch', "width" => 600, "fetch_format"=>"auto"];
         $fetched = cloudinary_url_internal($this->getLeadImageUrl(), $options);
-        return $fetched;
+        return $fetched ?: '';
     }
     /**
      * @return string
