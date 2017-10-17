@@ -69,8 +69,6 @@ class MeetupController extends Controller
      * @Route("/new", name="meetup_new")
      * @Method("POST")
      * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
-     *
-     * @Template()
      */
     public function newMeetupAction(Request $request, UserInterface $user) {
 

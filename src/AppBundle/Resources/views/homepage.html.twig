@@ -3,23 +3,22 @@
 {% block content %}
     <div class="container-fluid">
         <div class="row mt-2">
-              <div class="col-lg-5 col-md-6 col-sm-12">
-                    <div id="brand-logo" >
-                        <div class="logo-build">Build</div>
-                        <div class="logo-times">Zeitung</div>
-                    </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <div id="brand-logo">
+                    <div class="logo-build">Build</div>
+                    <div class="logo-times">Zeitung</div>
                 </div>
-                <div class="col-lg-7 col-md-6 col-sm-12">
-                    <section class="excerpts teaser" id="main-teaser">
+            </div>
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <section class="excerpts teaser" id="main-teaser">
                     {{ render(controller('AppBundle:Excerpt:index', {template:'teaser', limit: 3})) }}
-                    </section>
-                </div>
+                </section>
             </div>
         </div>
     </div>
 
     <section class="container excerpts mt-2">
-            {{ render(controller('AppBundle:Excerpt:index',{ limit: 10, offset: 3})) }}
+        {{ render(controller('AppBundle:Excerpt:index',{ limit: 10, offset: 3})) }}
     </section>
 
     <section class="container meetups mt-2">
@@ -30,6 +29,10 @@
         <div class="container py-3">
             {{ render(controller('AppBundle:Meetup:groups')) }}
         </div>
+    </section>
+
+    <section class="container conferences mt-2">
+        {{ render(controller('AppBundle:Conference:index')) }}
     </section>
 {% endblock %}
 

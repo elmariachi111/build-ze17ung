@@ -46,12 +46,19 @@ class Tag
     protected $meetupGroups;
 
     /**
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Conference", mappedBy="tags")
+     */
+    protected $conferences;
+
+    /**
      * Tag constructor.
      */
     public function __construct()
     {
         $this->excerpts = new ArrayCollection();
         $this->meetupGroups = new ArrayCollection();
+        $this->conferences = new ArrayCollection();
     }
 
     /**
@@ -146,6 +153,27 @@ class Tag
     public function removeExcerpt(Excerpt $excerpt) {
         $this->excerpts->removeElement($excerpt);
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getConferences(): ArrayCollection
+    {
+        return $this->conferences;
+    }
+
+    /**
+     * @param ArrayCollection $conferences
+     */
+    public function setConferences(ArrayCollection $conferences)
+    {
+        $this->conferences = $conferences;
+    }
+
+    public function addConference(Conference $conference) {
+        $this->conferences[] = $conference;
+    }
+
 
 
 }

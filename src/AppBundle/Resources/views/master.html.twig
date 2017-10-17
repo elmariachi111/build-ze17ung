@@ -22,7 +22,6 @@
 {% block navbar %}
     {% include '@App/navbar.html.twig' %}
 {% endblock %}
-<div class="container-fluid">
     {% for label, messages in app.flashes %}
         {% for message in messages %}
             <div class="alert alert-{{ label }}" role="alert">
@@ -35,7 +34,7 @@
     <footer>
         <p>&copy;  2017 Coding Berlin</p>
     </footer>
-</div> <!-- /container -->
+
 
 {% block javascripts %}
 <script src="{{ asset('build/manifest.js') }}"></script>
