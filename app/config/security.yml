@@ -30,7 +30,9 @@ security:
                 failure_path:      /login
                 oauth_user_provider:
                     service:  app_bundle.oauth_user_provider
-
+            logout:
+                path:   /logout
+                target: /
         main:
             anonymous: ~
 

@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Teko:700" rel="stylesheet">
     <!--link rel="icon" href="../../favicon.ico"-->
 
-    <title>Build-Zeitung</title>
+    <title>{% block title %}Build-Zeitung{% endblock %}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('build/global.css') }}" rel="stylesheet">
@@ -22,18 +22,22 @@
 {% block navbar %}
     {% include '@App/navbar.html.twig' %}
 {% endblock %}
-    {% for label, messages in app.flashes %}
-        {% for message in messages %}
-            <div class="alert alert-{{ label }}" role="alert">
-                {{ message }}
-            </div>
-        {% endfor %}
+
+{% block flash_messages %}
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert alert-{{ label }}" role="alert">
+            {{ message }}
+        </div>
     {% endfor %}
-    {% block content %}{% endblock %}
-    <hr>
-    <footer>
-        <p>&copy;  2017 Coding Berlin</p>
-    </footer>
+{% endfor %}
+{% endblock %}
+
+{% block content %}{% endblock %}
+<hr>
+<footer>
+    <p>&copy;  2017 Coding Berlin</p>
+</footer>
 
 
 {% block javascripts %}

@@ -16,8 +16,18 @@ class NewConferenceForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('title', TextType::class)
-            ->add('starts', DateTimeType::class)
-            ->add('ends', DateTimeType::class)
+            ->add('starts', DateTimeType::class,[
+                'widget' => 'single_text',
+                'attr' => [
+                    'rel' => 'datetimepicker'
+                ]
+            ])
+            ->add('ends', DateTimeType::class, [
+                'widget' => 'single_text',
+                'attr' => [
+                    'rel' => 'datetimepicker'
+                ]
+            ])
             ->add('url', UrlType::class, [
                 'required' => false,
             ])
@@ -25,7 +35,11 @@ class NewConferenceForm extends AbstractType
                 'required' => false,
             ])
             ->add('venueName', TextType::class)
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class,[
+                'attr' => [
+                    'class' => 'btn-black btn btn-block'
+                ]
+            ])
         ;
     }
 

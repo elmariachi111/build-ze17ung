@@ -9,6 +9,7 @@ $enable-rounded: false;
 $enable-gradients: true;
 $body-bg: #FAFAFA; //linear-gradient(45deg, #17eac0 0%,#66b6fc 100%);
 $grid-gutter-width-base: 20px;
+
 //$link-color: $color-limette;
 
 //$card-border-width: 0px;
@@ -21,4 +22,9 @@ $grid-gutter-width-base: 20px;
 
 @import '~bootstrap/scss/_variables';
 
+$screen-sm-min:576px;
+$screen-md-min:768px;
+$screen-lg-min:992px;
+
+$border-radius-base: $border-radius;
 $body-color: $black;

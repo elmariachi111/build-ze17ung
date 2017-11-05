@@ -10,6 +10,15 @@
                 </tr>
             {% endfor %}
         </table>
-        {{ form(form) }}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            {% include 'AppBundle:Conference:form.html.twig' %}
+        {% else %}
+            {% include '@App/components/_login_hint.html.twig' with { 'login_hint': 'to add a new conference'} %}
+        {% endif %}
     </div>
 </div>

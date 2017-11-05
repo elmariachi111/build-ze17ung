@@ -1,6 +1,10 @@
 @import '_variables';
 @import '~bootstrap/scss/mixins/_breakpoints';
+@import '~eonasdan-bootstrap-datetimepicker/src/sass/bootstrap-datetimepicker-build.scss';
 
+.collapse.in {
+  display:block;
+}
 #main-teaser {
   height:100%;
   min-height: 320px;
