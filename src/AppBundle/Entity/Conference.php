@@ -46,12 +46,6 @@ class Conference
     private $url;
 
     /**
-     * @var  string
-     * @ORM\Column(name="source", type="string", length=80, nullable=true)
-     */
-    private $source;
-
-    /**
      * @var string
      * @ORM\Column(name="venue_name", type="string", length=255, nullable=true)
      */
@@ -138,7 +132,7 @@ class Conference
     /**
      * @param \DateTime $ends
      */
-    public function setEnds(\DateTime $ends)
+    public function setEnds(\DateTime $ends = null)
     {
         $this->ends = $ends;
     }
@@ -157,22 +151,6 @@ class Conference
     public function setUrl(string $url)
     {
         $this->url = $url;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSource()
-    {
-        return $this->source;
-    }
-
-    /**
-     * @param string $source
-     */
-    public function setSource(string $source)
-    {
-        $this->source = $source;
     }
 
     /**

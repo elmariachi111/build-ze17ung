@@ -11,7 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class NewConferenceForm extends AbstractType
+class ConferenceForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -31,10 +31,12 @@ class NewConferenceForm extends AbstractType
             ->add('url', UrlType::class, [
                 'required' => false,
             ])
-            ->add('source', TextType::class, [
-                'required' => false,
+            ->add('venueName', TextType::class, [
+                'required' => false
             ])
-            ->add('venueName', TextType::class)
+            ->add('venueAddress', TextType::class, [
+                'required' => false
+            ])
             ->add('submit', SubmitType::class,[
                 'attr' => [
                     'class' => 'btn-black btn btn-block'

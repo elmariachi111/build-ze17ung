@@ -1,24 +1,19 @@
 <div class="row">
     <div class="col">
         <h2 class="section-header mb-4">Upcoming Conferences</h2>
-        <table class="table table-sm no-border">
+        <table class="table table-sm no-border" data-rel="editable-table">
             {% for conference in conferences %}
-                <tr class="{{ conference.past ? 'muted' }}">
-                    <td>{{ conference.title }}</td>
-                    <td>{{ conference.starts|date('D d.m.Y H:i') }}</td>
-                    <td>{{ conference.venueName }}</a></td>
-                </tr>
+                {% include '@App/Conference/row.html.twig' %}
             {% endfor %}
+            <tr rel="editor">
+                <td colspan="3">
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    {% include '@App/Conference/form.html.twig' %}
+                {% else %}
+                    {% include '@App/components/_login_hint.html.twig' with { 'login_hint': 'to add a new conference'} %}
+                {% endif %}
+                </td>
+            </tr>
         </table>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col">
-        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-            {% include 'AppBundle:Conference:form.html.twig' %}
-        {% else %}
-            {% include '@App/components/_login_hint.html.twig' with { 'login_hint': 'to add a new conference'} %}
-        {% endif %}
     </div>
 </div>

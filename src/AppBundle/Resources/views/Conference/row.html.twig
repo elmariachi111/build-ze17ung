@@ -1,0 +1,14 @@
+<tr class="{{ conference.past ? 'muted' }}" rel="editable">
+    <td>
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <a class="btn btn-outline-primary"
+               href="{{ path('conference_edit', {id: conference.id}) }}"
+               data-toggle="edit">
+                <i class="fa fa-pencil"></i>
+            </a>
+        {% endif %}
+        {{ conference.title }}
+    </td>
+    <td>{{ conference.starts|date('D d.m.Y H:i') }}</td>
+    <td>{{ conference.venueName }}</td>
+</tr>

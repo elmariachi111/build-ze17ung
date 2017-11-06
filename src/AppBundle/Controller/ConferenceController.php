@@ -3,7 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Conference;
-use AppBundle\Form\NewConferenceForm;
+use AppBundle\Form\ConferenceForm;
 use AppBundle\Repository\ConferenceRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -27,7 +27,7 @@ class ConferenceController extends Controller
         /** @var ConferenceRepository $repo */
         $repo = $this->getDoctrine()->getRepository(Conference::class);
 
-        $form = $this->createForm(NewConferenceForm::class, new Conference(), [
+        $form = $this->createForm(ConferenceForm::class, new Conference(), [
             'action' => $this->generateUrl('conference_new')
         ]);
 
@@ -45,7 +45,7 @@ class ConferenceController extends Controller
     public function newConferenceAction(Request $request) {
 
         $conference = new Conference();
-        $form = $this->createForm(NewConferenceForm::class, $conference, [
+        $form = $this->createForm(ConferenceForm::class, $conference, [
 
         ]);
 
@@ -56,6 +56,38 @@ class ConferenceController extends Controller
         $em->persist($conference);
         $em->flush();
 
-        return $this->redirectToRoute('homepage');
+        if ($request->isXmlHttpRequest()) {
+            return $this->render('@App/Conference/row.html.twig', ['conference' => $conference]);
+        } else {
+            return $this->redirectToRoute('homepage');
+        }
     }
+
+    /**
+     * @Route("/{id}", name="conference_edit")
+     * @Method({"GET", "POST"})
+     *
+     */
+    public function editConferenceAction(Request $request, $id) {
+
+        $conference = $this->getDoctrine()->getRepository(Conference::class)->find($id);
+
+        $form = $this->createForm(ConferenceForm::class, $conference, [
+            'action' => $this->generateUrl('conference_edit', ['id' => $id])
+        ]);
+
+        if ($request->getMethod() == Request::METHOD_GET) {
+            return $this->render('@App/Conference/form.html.twig', ['form' => $form->createView()]);
+        } else {
+            $form->handleRequest($request);
+            $this->getDoctrine()->getManager()->flush();
+            if ($request->isXmlHttpRequest()) {
+                return $this->render('@App/Conference/row.html.twig', ['conference' => $conference]);
+            } else {
+                return $this->redirectToRoute('homepage');
+            }
+        }
+    }
+
+
 }
